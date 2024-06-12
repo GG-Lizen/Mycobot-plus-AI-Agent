@@ -1,0 +1,19 @@
+[DEFAULT]
+#零一大模型
+YI_VISION_API = YOUR_API_TOKEN 
+#智谱
+ZHIPU_API = YOUR_API_TOKEN 
+#百度千帆appbuilder
+APP_BUILDER_API = YOUR_API_TOKEN 
+dev_video = /dev/video0
+mycobot_port = /dev/ttyACM1
+mycobot_baud = 115200
+
+[Carlibration]
+point1 = (-95.4, -237.3)
+point2 = (128.0, -109.8)
+
+[MYCOBOT]
+top_view_angles = -89.91, -20.74, -23.46, -46.75, 0.61, 132.01
+HEIGHT_END = 90
+HEIGHT_SAFE = 220

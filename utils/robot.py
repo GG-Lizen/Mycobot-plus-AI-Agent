@@ -1,0 +1,195 @@
+import cv2
+import numpy as np
+import time
+import configparser
+from VideoCapture import VideoCapture_Bufferless
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+angles = config['MYCOBOT']['TOP_VIEW_ANGLES']
+ANGLES_LIST = [float(angle) for angle in angles.split(',')]
+HEIGHT_SAFE = int(config['MYCOBOT']['HEIGHT_SAFE'])
+HEIGHT_END = int(config['MYCOBOT']['HEIGHT_END'])
+
+def back_zero(mc):
+    '''
+    机械臂归零
+    '''
+    print('机械臂归零')
+    mc.send_angles([0, 0, 0, 0, 0, 0], 40)
+    time.sleep(3)
+
+def relax_arms(mc):
+    print('放松机械臂关节')
+    mc.release_all_servos()
+
+def head_shake(mc):
+    # 左右摆头
+    mc.send_angles([0.87,(-50.44),47.28,0.35,(-0.43),(-0.26)],70)
+    time.sleep(1)
+    for count in range(2):
+        mc.send_angle(5, 30, 80)
+        time.sleep(0.5)
+        mc.send_angle(5, -30,80)
+        time.sleep(0.5)
+    # mc.send_angles([0.87,(-50.44),47.28,0.35,(-0.43),(-0.26)],70)
+    # time.sleep(1)
+    mc.send_angles([0, 0, 0, 0, 0, 0], 40)
+    time.sleep(2)
+
+
+def head_nod(mc):
+    # 点头
+    mc.send_angles([0.87,(-50.44),47.28,0.35,(-0.43),(-0.26)],70)
+    for count in range(2):
+        mc.send_angle(4, 13, 70)
+        time.sleep(0.5)
+        mc.send_angle(4, -20, 70)
+        time.sleep(1)
+        mc.send_angle(4,13,70)
+        time.sleep(0.5)
+    mc.send_angles([0.87,(-50.44),47.28,0.35,(-0.43),(-0.26)],70)
+
+def move_to_coords(mc,X=150, Y=-130, height=HEIGHT_SAFE):
+    print('移动至指定坐标：X {} Y {}'.format(X, Y))
+    mc.send_coords([X, Y, height,  -176.64, -0.83, -122.67], 50, 0)
+    time.sleep(4)
+
+def single_joint_move(mc,joint_index, angle):
+    print('关节 {} 旋转至 {} 度'.format(joint_index, angle))
+    mc.send_angle(joint_index, angle, 40)
+    time.sleep(2)
+
+def move_to_top_view(mc):
+    print('移动至俯视姿态')
+    mc.send_angles(ANGLES_LIST, 50)
+    time.sleep(2)
+
+def top_view_shot(mc,detector,check=False):
+    '''
+    拍摄一张图片并保存
+    check：是否需要人工看屏幕确认拍照成功，再在键盘上按q键确认继续
+    '''
+
+    back_zero(mc)
+    move_to_top_view(mc)
+    # 获取摄像头，传入0表示获取系统默认摄像头
+    # 创建一个 ConfigParser 对象
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    # 访问 DEFAULT 部分的配置
+    video_path = config['DEFAULT']['DEV_VIDEO']
+
+    stream_link = "/dev/video0"
+    streamer = VideoCapture_Bufferless(video_path)
+    try_detect_num =20
+    try:
+        while True:
+            if try_detect_num == 0:
+                back_zero(mc)
+                move_to_top_view(mc)
+                try_detect_num =20
+
+            frame = streamer.read()
+            if detector.get_calculate_params(frame) is None:
+                cv2.imshow("can't find aruco", frame)
+                print("未识别到aruco码")
+                try_detect_num -= 1 
+            else:
+                img_bgr = detector.transform_frame(frame)
+                break
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+    finally:
+        cv2.destroyAllWindows()
+        streamer.release()  # Ensure the video capture is released
+    # 保存图像
+    print('    保存至temp/vl_now.jpg')
+    cv2.imwrite('temp/vl_now.jpg', img_bgr)
+
+    
+    if check:
+
+    # 屏幕上展示图像
+        cv2.destroyAllWindows()   # 关闭所有opencv窗口
+        cv2.imshow('zihao_vlm', img_bgr) 
+        print('请确认拍照成功，按c键继续，按q键退出')
+        while(True):
+            key = cv2.waitKey(10) & 0xFF 
+            if key == ord('q'): # 按q键退出
+                cv2.destroyAllWindows()
+                break
+        
+def gripper_open(mc):
+    mc.set_gripper_state(0, 30)
+    time.sleep(2)
+def gripper_grip(mc):
+    mc.set_gripper_state(1, 30)
+    time.sleep(2)
+def set_gripper_value(mc,val):
+    mc.set_gripper_value(val, 20)
+def grip_END_SAFE(mc,hight=HEIGHT_END):
+    mc.send_coord(3,hight,40)
+    time.sleep(5)
+def grip_HEIGHT_SAFE(mc,hight=HEIGHT_SAFE):
+    mc.send_coord(3,hight,40)
+    time.sleep(5)
+def grip_move(mc, XY_START=[230,-50], HEIGHT_START=90, XY_END=[100,220], height_end=HEIGHT_END, hight_safe=HEIGHT_SAFE):
+
+    '''
+    用夹抓，将物体从起点夹起移动至终点
+
+    mc：机械臂实例
+    XY_START：起点机械臂坐标
+    HEIGHT_START：起点高度
+    XY_END：终点机械臂坐标
+    height_end：终点高度
+    hight_safe：搬运途中安全高度
+    '''
+
+    # 设置运动模式为插补
+    mc.set_fresh_mode(0)
+    
+    # # 机械臂归零
+    # print('    机械臂归零')
+    # mc.send_angles([0, 0, 0, 0, 0, 0], 40)
+    # time.sleep(4)
+    
+    # 吸泵移动至物体上方
+    print('    吸泵移动至物体上方')
+    mc.send_coords([XY_START[0], XY_START[1], hight_safe, 0, 180, 90], 20, 0)
+    time.sleep(4)
+
+    # 开启吸泵
+    gripper_open()
+    
+    # 吸泵向下吸取物体
+    print('    吸泵向下吸取物体')
+    mc.send_coords([XY_START[0], XY_START[1], HEIGHT_START, 0, 180, 90], 15, 0)
+    time.sleep(4)
+
+    # 升起物体
+    print('    升起物体')
+    mc.send_coords([XY_START[0], XY_START[1], hight_safe, 0, 180, 90], 15, 0)
+    time.sleep(4)
+
+    # 搬运物体至目标上方
+    print('    搬运物体至目标上方')
+    mc.send_coords([XY_END[0], XY_END[1], hight_safe, 0, 180, 90], 15, 0)
+    time.sleep(4)
+
+    # 向下放下物体
+    print('    向下放下物体')
+    mc.send_coords([XY_END[0], XY_END[1], height_end, 0, 180, 90], 20, 0)
+    time.sleep(3)
+
+    # 关闭吸泵
+    gripper_grip()
+
+    # 机械臂归零
+    print('    机械臂归零')
+    mc.send_angles([0, 0, 0, 0, 0, 0], 40)
+    time.sleep(3)
+
+

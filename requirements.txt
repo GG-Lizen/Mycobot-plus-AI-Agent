@@ -1,0 +1,11 @@
+appbuilder_sdk==0.7.1
+numpy==1.26.4
+openai==1.33.0
+opencv_python==4.9.0.80
+Pillow==10.3.0
+PyAudio==0.2.14
+pydantic==2.7.3
+Pygments==2.18.0
+pymycobot==3.4.6
+tqdm==4.66.4
+zhipuai==2.1.0.20240521
