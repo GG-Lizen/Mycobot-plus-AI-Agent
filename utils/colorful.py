@@ -17,15 +17,13 @@ class ColorPrinter:
         'blue': '\033[94m',
         'cyan': '\033[96m',
         'magenta': '\033[95m',
-        'purple' : '\033[95m'
+        'purple': '\033[95m'
     }
     
     RESET = '\033[0m'  # 重置样式
 
-    def __init__(self):
-        pass
-
-    def colorful(self, text, color):
+    @staticmethod
+    def colorful(text, color):
         """
         Outputs text with the specified color to the command line
 
@@ -36,8 +34,8 @@ class ColorPrinter:
         return: str
         """
         # 检查输入的颜色是否有效
-        if color not in self.COLORS:
+        if color not in ColorPrinter.COLORS:
             return text
 
         # 打印带指定颜色的文本
-        return f"{self.COLORS[color]}{text}{self.RESET}"
+        return f"{ColorPrinter.COLORS[color]}{text}{ColorPrinter.RESET}"
