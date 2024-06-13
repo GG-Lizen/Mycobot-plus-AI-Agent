@@ -3,14 +3,43 @@ import numpy as np
 import time
 import configparser
 from VideoCapture import VideoCapture_Bufferless
+from utils.colorful import ColorPrinter
+import subprocess
+
 
 config = configparser.ConfigParser()
 config.read('config.ini')
-
 angles = config['MYCOBOT']['TOP_VIEW_ANGLES']
 ANGLES_LIST = [float(angle) for angle in angles.split(',')]
 HEIGHT_SAFE = int(config['MYCOBOT']['HEIGHT_SAFE'])
 HEIGHT_END = int(config['MYCOBOT']['HEIGHT_END'])
+
+
+
+
+def get_device_path(pattern):
+    try:
+        # 获取 /dev/ 目录下符合指定模式的文件列表
+        return subprocess.check_output(f"ls {pattern}", shell=True).decode().strip()
+    except subprocess.CalledProcessError as e:
+        # 处理找不到文件的情况
+        print(f"No device found for pattern {pattern}: {e}")
+        return None
+
+def get_robot_port():
+    # 获取 /dev/ttyACM* 和 /dev/ttyUSB* 设备路径
+    robot_m5 = get_device_path("/dev/ttyUSB*")
+    robot_wio =get_device_path("/dev/ttyACM*")
+    if robot_m5 is None:
+        robot = robot_wio
+    else:
+        robot = robot_m5
+    # print(f'find device : {robot}' )
+    print('find device : ' + ColorPrinter.colorful(f'{robot}','blue') )
+    return robot
+
+
+
 
 def back_zero(mc):
     '''
