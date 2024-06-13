@@ -17,11 +17,9 @@ from task_type import Task,topological_sort,TaskType
 from utils.robot import *
 from utils.vlm import *
 from utils.led import *
-from run import mc
 from utils.colorful import ColorPrinter
 #物体机械臂坐标
 objects_coord={}
-colorPrinter=ColorPrinter()
 
 AGENT_SYS_PROMPT = '''
 你是我的机械臂助手，机械臂内置了一些函数，请你根据我的指令，以json形式输出要运行的对应函数和你给我的回复
@@ -134,7 +132,7 @@ TASK_SYS_PROMPT="""
 """
 
 def agent_task_plan(AGENT_PROMPT='先回到原点，再把LED灯改为墨绿色，然后把绿色方块放在篮球上'):
-    print( colorPrinter.colorful("\n******Agent智能体编排任务******\n",'green'))
+    print( ColorPrinter.colorful("\n******Agent智能体编排任务******\n",'green'))
    
     PROMPT = TASK_SYS_PROMPT.format(user_requirement=AGENT_PROMPT) +TASK_TYPE+TASK_OUTPUT_FORMAT
     agent_plan = llm_zhipu(PROMPT)
@@ -204,7 +202,7 @@ def exec_code(code_text):
         return True,code_result
 
 def control_agent(AGENT_PROMPT='把小猪佩奇放在摩托车上'):
-    print( colorPrinter.colorful("\n******control智能体执行动作******\n",'green'))
+    print( ColorPrinter.colorful("\n******control智能体执行动作******\n",'green'))
     request_num = 3
     PROMPT = CONTROL_SYS_PROMT.format(user_requirement=AGENT_PROMPT,objects_coord=json.dumps(objects_coord),context = '')
     while request_num >0:
@@ -222,7 +220,7 @@ def control_agent(AGENT_PROMPT='把小猪佩奇放在摩托车上'):
         config.read('config.ini')
         # 访问 DEFAULT 部分的配置
         video_path = config['DEFAULT']['DEV_VIDEO']
-        port = config['DEFAULT']['MYCOBOT_PORT']
+        port = get_robot_port()
         baud = config['DEFAULT']['MYCOBOT_BAUD']
         code_text = MYCOBOT_INIT_CODE.format(port=port,baud=baud) +code_to_excute
         ret,result=exec_code(code_text)
@@ -287,7 +285,7 @@ def detect_result_valid(data):
     
     return True
 def detection_agent(detector,AGENT_PROMPT='进行目标检测确保小猪佩奇和摩托车被检测到'):
-    print( colorPrinter.colorful("\n******detection智能体执行动作******\n",'green'))
+    print( ColorPrinter.colorful("\n******detection智能体执行动作******\n",'green'))
     print('拍摄俯视图')
     top_view_shot(mc,detector,check=False)
     
@@ -334,8 +332,8 @@ def detection_agent(detector,AGENT_PROMPT='进行目标检测确保小猪佩奇�
 
 
 
-def agent_maneger(detector,AGENT_PROMPT='先回到原点，再把LED灯改为小猪佩奇色，然后把小猪佩奇放在摩托车上'):
-    print( colorPrinter.colorful("\n******Agent智能体启动******\n",'magenta'))
+def agent_maneger(mc,detector,AGENT_PROMPT='先回到原点，再把LED灯改为小猪佩奇色，然后把小猪佩奇放在摩托车上'):
+    print( ColorPrinter.colorful("\n******Agent智能体启动******\n",'magenta'))
     task_plan = agent_task_plan(AGENT_PROMPT)
     json_pattern = re.compile(r'```json\n(.*?)\n```', re.DOTALL)
     match = json_pattern.search(task_plan)
@@ -367,16 +365,16 @@ def agent_maneger(detector,AGENT_PROMPT='先回到原点，再把LED灯改为小
         
         # 执行任务，根据任务类型进行处理
         if task.task_type == TaskType.CONTROL:
-            print( colorPrinter.colorful(f"执行任务 {task.task_id}: {task.instruction}, 类型: CONTROL",'yellow'))
+            print( ColorPrinter.colorful(f"执行任务 {task.task_id}: {task.instruction}, 类型: CONTROL",'yellow'))
             control_agent(task.instruction)
         elif task.task_type == TaskType.LED:
-            print( colorPrinter.colorful(f"执行任务 {task.task_id}: {task.instruction}, 类型: LED",'yellow'))
+            print( ColorPrinter.colorful(f"执行任务 {task.task_id}: {task.instruction}, 类型: LED",'yellow'))
             llm_led(mc,task.instruction)
         elif task.task_type == TaskType.DETECTION:
-            print( colorPrinter.colorful(f"执行任务 {task.task_id}: {task.instruction}, 类型: DETECTION",'yellow'))
+            print( ColorPrinter.colorful(f"执行任务 {task.task_id}: {task.instruction}, 类型: DETECTION",'yellow'))
             detection_agent(detector,task.instruction)
         else:
-            print( colorPrinter.colorful(f"未知的任务类型 {task.task_id}: {task.instruction}",'red'))
+            print( ColorPrinter.colorful(f"未知的任务类型 {task.task_id}: {task.instruction}",'red'))
             raise
     
 
