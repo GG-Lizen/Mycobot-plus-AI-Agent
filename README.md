@@ -49,7 +49,9 @@ pip install -r requirements.txt
 
 ### Configuration
 
-把`config.ini.template`修改为`config.ini`，并在`YOUR_API_TOKEN`，填入你的API_TOKEN，`dev_video`填入机械臂摄像头设备号，`mycobot_port`填入机械臂端口号。
+#### [DEFAULT]
+
+把`config.ini.template`修改为`config.ini`，并在`YOUR_API_TOKEN`，填入你的API_TOKEN，`dev_video`填入机械臂摄像头设备号，`MYCOBOT_BAUD`一般不需要修改。
 
 ```
 #查看机械臂摄像头设备号
@@ -68,7 +70,15 @@ ls /dev/ttyUSB*
 sudo chmod a+rw /dev/ttyACM0 #改成你的设备号
 ```
 
-`top_view_angles`，是机械臂俯身拍摄时机械臂的角度;`HEIGHT_END` 是机械臂下降到抓取位置的高度 `HEIGHT_SAFE` 是机械臂上升到搬运位置的高度，都要通过自己调试获取。
+#### [Carlibration]
+
+不需要修改
+
+#### [MYCOBOT]
+
+**这一部分要通过实际调试后写入**
+
+`top_view_angles`，是机械臂俯身拍摄时机械臂的角度;`HEIGHT_END` 是机械臂下降到抓取位置的高度 ;`HEIGHT_SAFE`是机械臂上升到搬运位置的高度;`COORDS_R`是移动到指定坐标时的rx,ry,rz值
 
 ```
 mc.send_angles([0, 0, 0, 0, 0, 0], 40)#机械臂归零
@@ -296,7 +306,7 @@ python run.py
 
 ## what's more
 
-tips.md包含：ROS安装，相机内参标定，安装moveit，安装mycobot_ros
+[tips.md](tips.md)包含：ROS安装，相机内参标定，安装moveit，安装mycobot_ros
 
 > rospy不支持 python3.11
 

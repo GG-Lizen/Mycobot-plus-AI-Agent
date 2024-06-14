@@ -6,7 +6,6 @@ ZHIPU_API = YOUR_API_TOKEN
 #百度千帆appbuilder
 APP_BUILDER_API = YOUR_API_TOKEN 
 DEV_VIDEO = /dev/video0
-# mycobot_port = /dev/ttyACM1
 MYCOBOT_BAUD = 115200
 
 [Carlibration]
