@@ -33,7 +33,7 @@ def main():
         order = input('请输入指令')
     elif start_record_ok == 'c':
         order = '先回到原点，然后把包装盒放到小猪佩奇上'
-    top_view_shot(mc,detector,order)
+    # top_view_shot(mc,detector,order)
     agent_maneger(mc,detector,order)
     print("执行完成")
 
