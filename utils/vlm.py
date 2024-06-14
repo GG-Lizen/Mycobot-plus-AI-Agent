@@ -1,7 +1,12 @@
+"""
+@Time    : 2024-5-22
+@Author  : 同济子豪兄
+@File    : llm.py
+@Modify  : GG-Lizen
+"""
 # utils_vlm.py
 # 同济子豪兄 2024-5-22
 # 多模态大模型、可视化
-
 import cv2
 import threading
 import numpy as np

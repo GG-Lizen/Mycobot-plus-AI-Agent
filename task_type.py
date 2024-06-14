@@ -1,3 +1,9 @@
+"""
+@Time    : 2024/6/5 17:25
+@Author  : GG-Lizen
+@File    : task_type.py
+"""
+
 from enum import Enum
 from pydantic import BaseModel
 from collections import deque

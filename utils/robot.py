@@ -1,8 +1,14 @@
+"""
+@Time    : 
+@Author  : 同济子豪兄
+@File    : llm.py
+@Modify  : GG-Lizen
+"""
 import cv2
 import numpy as np
 import time
 import configparser
-from VideoCapture import VideoCapture_Bufferless
+from utils.VideoCapture import VideoCapture_Bufferless
 from utils.colorful import ColorPrinter
 import subprocess
 
@@ -11,6 +17,8 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 angles = config['MYCOBOT']['TOP_VIEW_ANGLES']
 ANGLES_LIST = [float(angle) for angle in angles.split(',')]
+coords_r = config['MYCOBOT']['COORDS_R']
+COORD_R_LIST = [float(coord_r) for coord_r in coords_r.split(',')]
 HEIGHT_SAFE = int(config['MYCOBOT']['HEIGHT_SAFE'])
 HEIGHT_END = int(config['MYCOBOT']['HEIGHT_END'])
 
@@ -80,10 +88,11 @@ def head_nod(mc):
         time.sleep(0.5)
     mc.send_angles([0.87,(-50.44),47.28,0.35,(-0.43),(-0.26)],70)
 
-def move_to_coords(mc,X=150, Y=-130, height=HEIGHT_SAFE):
+def move_to_coords(mc,X=150, Y=-130, height=HEIGHT_END+(HEIGHT_SAFE-HEIGHT_END)/2):
     print('移动至指定坐标：X {} Y {}'.format(X, Y))
-    mc.send_coords([X, Y, height,  -176.64, -0.83, -122.67], 50, 0)
-    time.sleep(4)
+    #根据实际情况修改
+    mc.send_coords([X, Y, height, COORD_R_LIST[0], COORD_R_LIST[1],COORD_R_LIST[2]], 50, 0)
+    time.sleep(3)
 
 def single_joint_move(mc,joint_index, angle):
     print('关节 {} 旋转至 {} 度'.format(joint_index, angle))
@@ -164,65 +173,65 @@ def set_gripper_value(mc,val):
     mc.set_gripper_value(val, 20)
 def grip_END_SAFE(mc,hight=HEIGHT_END):
     mc.send_coord(3,hight,40)
-    time.sleep(5)
+    time.sleep(3)
 def grip_HEIGHT_SAFE(mc,hight=HEIGHT_SAFE):
     mc.send_coord(3,hight,40)
-    time.sleep(5)
-def grip_move(mc, XY_START=[230,-50], HEIGHT_START=90, XY_END=[100,220], height_end=HEIGHT_END, hight_safe=HEIGHT_SAFE):
-
-    '''
-    用夹抓，将物体从起点夹起移动至终点
-
-    mc：机械臂实例
-    XY_START：起点机械臂坐标
-    HEIGHT_START：起点高度
-    XY_END：终点机械臂坐标
-    height_end：终点高度
-    hight_safe：搬运途中安全高度
-    '''
-
-    # 设置运动模式为插补
-    mc.set_fresh_mode(0)
-    
-    # # 机械臂归零
-    # print('    机械臂归零')
-    # mc.send_angles([0, 0, 0, 0, 0, 0], 40)
-    # time.sleep(4)
-    
-    # 吸泵移动至物体上方
-    print('    吸泵移动至物体上方')
-    mc.send_coords([XY_START[0], XY_START[1], hight_safe, 0, 180, 90], 20, 0)
-    time.sleep(4)
-
-    # 开启吸泵
-    gripper_open()
-    
-    # 吸泵向下吸取物体
-    print('    吸泵向下吸取物体')
-    mc.send_coords([XY_START[0], XY_START[1], HEIGHT_START, 0, 180, 90], 15, 0)
-    time.sleep(4)
-
-    # 升起物体
-    print('    升起物体')
-    mc.send_coords([XY_START[0], XY_START[1], hight_safe, 0, 180, 90], 15, 0)
-    time.sleep(4)
-
-    # 搬运物体至目标上方
-    print('    搬运物体至目标上方')
-    mc.send_coords([XY_END[0], XY_END[1], hight_safe, 0, 180, 90], 15, 0)
-    time.sleep(4)
-
-    # 向下放下物体
-    print('    向下放下物体')
-    mc.send_coords([XY_END[0], XY_END[1], height_end, 0, 180, 90], 20, 0)
     time.sleep(3)
+# def grip_move(mc, XY_START=[230,-50], HEIGHT_START=90, XY_END=[100,220], height_end=HEIGHT_END, hight_safe=HEIGHT_SAFE):
 
-    # 关闭吸泵
-    gripper_grip()
+#     '''
+#     用夹抓，将物体从起点夹起移动至终点
 
-    # 机械臂归零
-    print('    机械臂归零')
-    mc.send_angles([0, 0, 0, 0, 0, 0], 40)
-    time.sleep(3)
+#     mc：机械臂实例
+#     XY_START：起点机械臂坐标
+#     HEIGHT_START：起点高度
+#     XY_END：终点机械臂坐标
+#     height_end：终点高度
+#     hight_safe：搬运途中安全高度
+#     '''
+
+#     # 设置运动模式为插补
+#     mc.set_fresh_mode(0)
+    
+#     # # 机械臂归零
+#     # print('    机械臂归零')
+#     # mc.send_angles([0, 0, 0, 0, 0, 0], 40)
+#     # time.sleep(4)
+    
+#     # 吸泵移动至物体上方
+#     print('    吸泵移动至物体上方')
+#     mc.send_coords([XY_START[0], XY_START[1], hight_safe, 0, 180, 90], 20, 0)
+#     time.sleep(4)
+
+#     # 开启吸泵
+#     gripper_open()
+    
+#     # 吸泵向下吸取物体
+#     print('    吸泵向下吸取物体')
+#     mc.send_coords([XY_START[0], XY_START[1], HEIGHT_START, 0, 180, 90], 15, 0)
+#     time.sleep(4)
+
+#     # 升起物体
+#     print('    升起物体')
+#     mc.send_coords([XY_START[0], XY_START[1], hight_safe, 0, 180, 90], 15, 0)
+#     time.sleep(4)
+
+#     # 搬运物体至目标上方
+#     print('    搬运物体至目标上方')
+#     mc.send_coords([XY_END[0], XY_END[1], hight_safe, 0, 180, 90], 15, 0)
+#     time.sleep(4)
+
+#     # 向下放下物体
+#     print('    向下放下物体')
+#     mc.send_coords([XY_END[0], XY_END[1], height_end, 0, 180, 90], 20, 0)
+#     time.sleep(3)
+
+#     # 关闭吸泵
+#     gripper_grip()
+
+#     # 机械臂归零
+#     print('    机械臂归零')
+#     mc.send_angles([0, 0, 0, 0, 0, 0], 40)
+#     time.sleep(3)
 
 

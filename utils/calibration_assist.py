@@ -31,12 +31,12 @@ def calibration_assist(mc:MyCobot,detect:Calibrator):
 
         ret, frame = cap.read()
         frame = detect.transform_frame(frame)
-        
-        cv2.imshow("press 'q' to quit ", frame)
+        if frame is None:
+            continue
+        # cv2.imshow("press 'q' to quit ", frame)
 
         # calculate the parameters of camera clipping
         if init_num < 20:
-            
             if detect.get_calculate_params(frame) is None:
                 cv2.imshow("can't find aruco", frame)
                 continue
@@ -99,18 +99,7 @@ def calibration_assist(mc:MyCobot,detect:Calibrator):
             aruco_detect_flag = True
             cv2.destroyAllWindows()
             # print ("ok")
-            continue
-        # get detect result
-
-        # print(detect.eye2hand(detect.x1,detect.y1))
-        # print(detect.x1)
-        # print(detect.y1)
-        # print(detect.eye2hand(detect.x2,detect.y2))
-        # print(detect.eye2hand(494,411))
-
-        # cv2.imwrite("out.jpg",frame)
-        # break
-        # cv2.imshow("figure", frame)
+            break
     cap.release()
     cv2.destroyAllWindows()
     if not aruco_detect_flag:

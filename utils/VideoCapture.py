@@ -1,3 +1,8 @@
+"""
+@Time    : 2024/6/5 17:25
+@Author  : GG-Lizen
+@File    : VideoCapture.py
+"""
 import cv2
 import threading
 

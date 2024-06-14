@@ -1,3 +1,9 @@
+"""
+@Time    : 2024-5-22
+@Author  : 同济子豪兄
+@File    : asr.py
+@Modify  : GG-Lizen
+"""
 # utils_asr.py
 # 同济子豪兄 2024-5-22
 # 录音+语音识别
