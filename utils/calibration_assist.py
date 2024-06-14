@@ -9,7 +9,7 @@ from pymycobot.mycobot import MyCobot
 from Calibrator import Calibrator
 import configparser
 import ast
-
+from logs import logger
 # 创建一个 ConfigParser 对象
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -103,13 +103,13 @@ def calibration_assist(mc:MyCobot,detect:Calibrator):
     cap.release()
     cv2.destroyAllWindows()
     if not aruco_detect_flag:
-        print("arcuo码识别错误")
+        logger.error("arcuo码识别错误")
         return False
     
     while True:
         user_input = input("是否进行机械臂标定，输入'n'取消:")
         if user_input == 'n':
-            print('将从配置文件中读取，请确保点位正确')
+            logger.info('将从配置文件中读取机械臂标定点，请确保点位正确')
             # 访问 Carlibration 部分的配置
             point1 = config['Carlibration']['point1']
             point2 = config['Carlibration']['point2']
@@ -120,7 +120,7 @@ def calibration_assist(mc:MyCobot,detect:Calibrator):
             detect.set_arm_aruco_coord(point1[0],point1[1],point2[0],point2[1])
             break
         else:
-            print('开始标定')
+            logger.info('开始标定')
             detect.get_robotic_arm_coord(mc)
             #将机械臂标定坐标写入文件
             config['Carlibration']['point1']=str((detect.arm_x1,detect.arm_y1))
@@ -129,5 +129,5 @@ def calibration_assist(mc:MyCobot,detect:Calibrator):
                 config.write(configfile)
             break
     gripper_open(mc)
-    print("标定完成")
+    logger.success("标定完成")
     return True

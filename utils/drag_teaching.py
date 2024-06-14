@@ -11,7 +11,7 @@ import os
 # import tty
 import threading
 import json
-
+from logs import logger
 
 # 连接机械臂
 
@@ -35,8 +35,8 @@ class Helper(object):
         self.w, self.h = os.get_terminal_size()
 
     def echo(self, msg):
-        print("\r{}".format(" " * self.w), end="")
-        print("\r{}".format(msg), end="")
+        logger.info("\r{}".format(" " * self.w), end="")
+        logger.info("\r{}".format(msg), end="")
 
 
 class TeachingTest(Helper):
@@ -61,7 +61,7 @@ class TeachingTest(Helper):
                 if angles:
                     self.record_list.append(angles)
                     time.sleep(0.1)
-                    print("\r {}".format(time.time() - start_t), end="")
+                    logger.info("\r {}".format(time.time() - start_t), end="")
 
         self.echo("开始录制动作\n")
         self.record_t = threading.Thread(target=_record, daemon=True)
@@ -124,7 +124,7 @@ class TeachingTest(Helper):
                 self.echo("Error: invalid data.\n")
 
     def print_menu(self):
-        print(
+        logger.info(
             """\
         \r 拖动示教 同济子豪兄
         \r q: 退出
@@ -170,18 +170,18 @@ class TeachingTest(Helper):
                 self.echo("机械臂归零\n")
                 time.sleep(3)
             else:
-                print(key)
+                logger.info(key)
                 continue
 
 def drag_teach(mc):
-    print('机械臂归零')
+    logger.info('机械臂归零')
     mc.send_angles([0, 0, 0, 0, 0, 0], 40)
     time.sleep(3)
     
     recorder = TeachingTest(mc)
     recorder.start()
 
-    print('机械臂归零')
+    logger.info('机械臂归零')
     mc.send_angles([0, 0, 0, 0, 0, 0], 40)
     time.sleep(3)
 

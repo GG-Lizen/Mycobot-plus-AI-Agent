@@ -22,6 +22,7 @@ import configparser
 import json
 import re
 from utils.json_extract_parse import json_fix
+from logs import logger
 # 创建一个 ConfigParser 对象
 config = configparser.ConfigParser()
 # 读取配置文件
@@ -77,27 +78,25 @@ def yi_vision_api(PROMPT='帮我把红色方块放在钢笔上', img_path='temp/
         # 将提取的 JSON 字符串转换为 Python 对象
         try:
             json_data = json.loads(json_str)
-            print('解析成功！llm生成任务如下：')
-            print(json.dumps(json_data, indent=4, ensure_ascii=False))
+            logger.debug('llm识别结果如下：\n'+json.dumps(json_data, indent=4, ensure_ascii=False))
         except json.JSONDecodeError as e:
-            print(f"JSON解析错误: {e}")
-            print("llm输出如下：\n"+result+"\n请确保llm输出格式正确！")
-            print("提取json："+json_str)
+            logger.error(f"JSON解析错误: {e}")
+            logger.debug("llm输出如下：\n"+result+"\n请确保llm输出格式正确！")
+            logger.debug("提取json："+json_str)
 
             
     else:
-        print("未找到 JSON 内容")
-        print(result)
-        print('    尝试修复')
+        logger.debug("未找到 JSON 内容")
+        logger.debug(result)
+        logger.debug('尝试修复')
         result = json_fix(result)
         if result is None:
-            print('    修复失败')
+            logger.error('未找到 JSON 内容')
             return None
         else:
-            print('    修复成功')
+            logger.debug('修复成功')
             return result
 
-    print('    大模型调用成功！')
 
     return json_data
 

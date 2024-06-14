@@ -1,0 +1,1819 @@
+2024-06-14 16:36:10.255 | INFO     | __main__:<module>:1 - 123
+2024-06-14 16:41:22.560 | INFO     | __main__:<module>:1 - 123
+2024-06-14 16:47:22.789 | SUCCESS  | __main__:main:39 - 执行完成
+2024-06-14 16:50:53.751 | WARNING  | __main__:<module>:1 - 123
+2024-06-14 16:54:47.108 | ERROR    | __main__:<module>:1 - control_agent 执行失败
+2024-06-14 16:56:21.787 | INFO     | agents:control_agent:49 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 17:14:31.043 | INFO     | agents:control_agent:49 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 17:14:53.482 | INFO     | agents:control_agent:49 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 17:15:14.464 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:15:14.468 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:15:14.606 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:15:19.608 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 17:16:24.755 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:16:24.758 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:16:24.898 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:16:29.900 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 17:16:34.883 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 17:16:36.885 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 17:16:41.318 | INFO     | agents:agent_maneger:152 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 17:16:41.319 | INFO     | agents:agent_task_plan:29 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 17:16:50.092 | INFO     | agents:agent_maneger:162 - 解析成功！llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "对包装盒进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "对小猪佩奇进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "将包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 17:16:50.093 | INFO     | agents:agent_maneger:183 - [93m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 17:16:50.094 | INFO     | agents:control_agent:49 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 17:16:53.480 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:16:53.486 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:16:53.600 | INFO     | agents:exec_code:38 - 0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:16:54.287 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:16:57.395 | WARNING  | agents:control_agent:75 - 2024-06-14 17:16 | INFO | 机械臂归零
+
+2024-06-14 17:17:03.835 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:17:03.842 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:17:03.845 | INFO     | agents:exec_code:38 - 0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:17:04.557 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:17:07.701 | WARNING  | agents:control_agent:75 - 2024-06-14 17:17 | INFO | 机械臂归零
+
+2024-06-14 17:17:11.075 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:17:11.079 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:17:11.080 | INFO     | agents:exec_code:38 - 0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:17:11.967 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:17:15.104 | WARNING  | agents:control_agent:75 - 2024-06-14 17:17 | INFO | 机械臂归零
+
+2024-06-14 17:17:19.855 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:17:19.859 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:17:19.860 | INFO     | agents:exec_code:38 - 0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:17:20.535 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:17:23.653 | WARNING  | agents:control_agent:75 - 2024-06-14 17:17 | INFO | 机械臂归零
+
+2024-06-14 17:17:26.787 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:17:26.793 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:17:26.797 | INFO     | agents:exec_code:38 - 0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:17:27.540 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:17:30.678 | WARNING  | agents:control_agent:75 - 2024-06-14 17:17 | INFO | 机械臂归零
+
+2024-06-14 17:17:34.923 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:17:34.929 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:17:34.931 | INFO     | agents:exec_code:38 - 0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:17:35.712 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:17:38.830 | WARNING  | agents:control_agent:75 - 2024-06-14 17:17 | INFO | 机械臂归零
+
+2024-06-14 17:19:37.878 | ERROR    | __main__:<module>:1 - control_agent 执行失败
+2024-06-14 17:22:51.253 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:22:51.256 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:22:51.393 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:22:56.395 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 17:23:07.348 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 17:23:09.350 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 17:23:12.351 | INFO     | agents:agent_maneger:152 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 17:23:12.351 | INFO     | agents:agent_task_plan:29 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 17:23:22.172 | INFO     | agents:agent_maneger:162 - 解析成功！llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "对包装盒进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "对小猪佩奇进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "将包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 17:23:22.173 | INFO     | agents:agent_maneger:183 - [93m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 17:23:22.174 | INFO     | agents:control_agent:49 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 17:23:25.199 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:23:25.205 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:23:25.293 | INFO     | agents:exec_code:38 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:23:26.018 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:23:29.162 | WARNING  | agents:control_agent:75 - 2024-06-14 17:23 | INFO     | robot.py:56 | 机械臂归零
+
+2024-06-14 17:23:33.526 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:23:33.530 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:23:33.532 | INFO     | agents:exec_code:38 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:23:34.230 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:23:37.345 | WARNING  | agents:control_agent:75 - 2024-06-14 17:23 | INFO     | robot.py:56 | 机械臂归零
+
+2024-06-14 17:23:41.478 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:23:41.485 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:23:41.488 | INFO     | agents:exec_code:38 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:23:42.324 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:23:45.486 | WARNING  | agents:control_agent:75 - 2024-06-14 17:23 | INFO     | robot.py:56 | 机械臂归零
+
+2024-06-14 17:26:56.471 | INFO     | agents:control_agent:50 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 17:26:59.831 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:26:59.838 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:26:59.900 | INFO     | agents:exec_code:38 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:27:00.581 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:27:03.694 | WARNING  | agents:control_agent:76 - 2024-06-14 17:27 | INFO     | robot.py:56 | 机械臂归零
+
+2024-06-14 17:27:07.761 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:27:07.769 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:27:07.772 | INFO     | agents:exec_code:38 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:29:08.654 | INFO     | agents:control_agent:49 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 17:29:12.943 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:29:12.949 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:29:13.047 | INFO     | agents:exec_code:38 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:29:13.755 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:30:52.718 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:31:18.450 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:31:18.454 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:31:18.591 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:31:23.593 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 17:31:31.678 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 17:31:33.680 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 17:31:37.999 | INFO     | agents:agent_maneger:152 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 17:31:37.999 | INFO     | agents:agent_task_plan:29 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 17:31:48.067 | INFO     | agents:agent_maneger:162 - 解析成功！llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "进行目标检测，确保小猪佩奇和包装盒都被识别",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "移动到包装盒位置并抓取",
+        "task_type": "control"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "移动到小猪佩奇位置并放置包装盒",
+        "task_type": "control"
+    }
+]
+2024-06-14 17:31:48.068 | INFO     | agents:agent_maneger:183 - [93m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 17:31:48.069 | INFO     | agents:control_agent:49 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 17:31:51.011 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:31:51.019 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:31:51.108 | INFO     | agents:exec_code:38 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 17:31:51.777 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:31:54.925 | INFO     | agents:agent_maneger:189 - [93m执行任务 2: 进行目标检测，确保小猪佩奇和包装盒都被识别, 类型: DETECTION[0m
+2024-06-14 17:31:54.925 | INFO     | agents:detection_agent:112 - [92m
+******detection智能体执行动作******
+[0m
+2024-06-14 17:31:54.925 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:31:57.926 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 17:32:00.368 | SUCCESS  | utils.robot:top_view_shot:151 - 图像保存至temp/vl_now.jpg
+2024-06-14 17:32:00.382 | INFO     | agents:detection_agent:118 -     尝试第 1 次访问多模态大模型
+2024-06-14 17:32:16.068 | SUCCESS  | utils.vlm:yi_vision_api:81 - 解析成功！llm生成任务如下：
+[
+    {
+        "name": "篮球",
+        "top_left": [
+            156,
+            69,
+            308,
+            379
+        ],
+        "right_bottom": [
+            210,
+            152,
+            370,
+            389
+        ]
+    },
+    {
+        "name": "包装盒",
+        "top_left": [
+            515,
+            171,
+            880,
+            438
+        ],
+        "right_bottom": [
+            594,
+            341,
+            850,
+            452
+        ]
+    },
+    {
+        "name": "小猪佩奇",
+        "top_left": [
+            329,
+            459,
+            547,
+            873
+        ],
+        "right_bottom": [
+            360,
+            654,
+            577,
+            880
+        ]
+    },
+    {
+        "name": "摩托车",
+        "top_left": [
+            675,
+            525,
+            949,
+            866
+        ],
+        "right_bottom": [
+            761,
+            739,
+            962,
+            874
+        ]
+    }
+]
+2024-06-14 17:32:16.072 | SUCCESS  | utils.vlm:yi_vision_api:100 - 大模型调用成功！
+2024-06-14 17:32:16.073 | SUCCESS  | agents:detection_agent:120 -     多模态大模型调用成功！
+2024-06-14 17:32:16.074 | WARNING  | agents:detection_agent:131 - 格式错误
+2024-06-14 17:32:16.075 | INFO     | agents:detection_agent:118 -     尝试第 2 次访问多模态大模型
+2024-06-14 17:32:26.931 | SUCCESS  | utils.vlm:yi_vision_api:81 - 解析成功！llm生成任务如下：
+[
+    {
+        "name": "小猪佩奇",
+        "top_left": [
+            343,
+            447
+        ],
+        "right_bottom": [
+            553,
+            897
+        ]
+    },
+    {
+        "name": "包装盒",
+        "top_left": [
+            510,
+            114
+        ],
+        "right_bottom": [
+            866,
+            456
+        ]
+    }
+]
+2024-06-14 17:32:26.932 | SUCCESS  | utils.vlm:yi_vision_api:100 - 大模型调用成功！
+2024-06-14 17:32:26.934 | SUCCESS  | agents:detection_agent:120 -     多模态大模型调用成功！
+2024-06-14 17:32:26.971 | INFO     | agents:agent_maneger:183 - [93m执行任务 3: 移动到包装盒位置并抓取, 类型: CONTROL[0m
+2024-06-14 17:32:26.972 | INFO     | agents:control_agent:49 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 17:32:37.900 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:32:37.909 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:32:37.914 | INFO     | agents:exec_code:38 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)  [37m# 1. 机械臂位置归零[39;49;00m[37m[39;49;00m
+0005: [37m[39;49;00m
+0006: move_to_coords(mc, X=[34m57[39;49;00m, Y=-[34m124[39;49;00m)  [37m# 2. 移动到包装盒的位置[39;49;00m[37m[39;49;00m
+0007: [37m[39;49;00m
+0008: gripper_open(mc)  [37m# 3. 打开夹爪准备抓取物体[39;49;00m[37m[39;49;00m
+0009: [37m[39;49;00m
+0010: grip_END_SAFE(mc)  [37m# 4. 降低夹爪到夹取物体的安全高度[39;49;00m[37m[39;49;00m
+0011: [37m[39;49;00m
+0012: gripper_grip(mc)  [37m# 5. 关闭夹爪以抓取物体[39;49;00m[37m[39;49;00m
+0013: [37m[39;49;00m
+0014: grip_HEIGHT_SAFE(mc)  [37m# 6. 提升夹爪到搬运途中的安全高度[39;49;00m[37m[39;49;00m
+0015: 
+
+2024-06-14 17:32:38.684 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:32:41.685 | INFO     | utils.robot:move_to_coords:92 - 移动至指定坐标：X 57 Y -124
+2024-06-14 17:32:54.799 | INFO     | agents:agent_maneger:183 - [93m执行任务 4: 移动到小猪佩奇位置并放置包装盒, 类型: CONTROL[0m
+2024-06-14 17:32:54.799 | INFO     | agents:control_agent:49 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 17:33:06.250 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 17:33:06.264 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 17:33:06.270 | INFO     | agents:exec_code:38 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: [37m# 首先确保机械臂位置归零[39;49;00m[37m[39;49;00m
+0005: back_zero(mc)[37m[39;49;00m
+0006: [37m[39;49;00m
+0007: [37m# 移动到包装盒位置，准备夹取[39;49;00m[37m[39;49;00m
+0008: move_to_coords(mc, X=[34m57[39;49;00m, Y=-[34m124[39;49;00m)[37m[39;49;00m
+0009: [37m[39;49;00m
+0010: [37m# 打开夹爪[39;49;00m[37m[39;49;00m
+0011: gripper_open(mc)[37m[39;49;00m
+0012: [37m[39;49;00m
+0013: [37m# 夹爪下降到夹取物体时的安全高度[39;49;00m[37m[39;49;00m
+0014: grip_END_SAFE(mc)[37m[39;49;00m
+0015: [37m[39;49;00m
+0016: [37m# 关闭夹爪，夹住物体[39;49;00m[37m[39;49;00m
+0017: gripper_grip(mc)[37m[39;49;00m
+0018: [37m[39;49;00m
+0019: [37m# 夹爪上升到搬运途中的安全高度[39;49;00m[37m[39;49;00m
+0020: grip_HEIGHT_SAFE(mc)[37m[39;49;00m
+0021: [37m[39;49;00m
+0022: [37m# 移动到小猪佩奇的位置[39;49;00m[37m[39;49;00m
+0023: move_to_coords(mc, X=-[34m7[39;49;00m, Y=-[34m192[39;49;00m)[37m[39;49;00m
+0024: [37m[39;49;00m
+0025: [37m# 下降到放置物体的安全高度[39;49;00m[37m[39;49;00m
+0026: grip_END_SAFE(mc)[37m[39;49;00m
+0027: [37m[39;49;00m
+0028: [37m# 打开夹爪，放置物体[39;49;00m[37m[39;49;00m
+0029: gripper_open(mc)[37m[39;49;00m
+0030: [37m[39;49;00m
+0031: [37m# 夹爪上升到搬运途中的安全高度[39;49;00m[37m[39;49;00m
+0032: grip_HEIGHT_SAFE(mc)[37m[39;49;00m
+0033: 
+
+2024-06-14 17:33:06.996 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 17:33:09.997 | INFO     | utils.robot:move_to_coords:92 - 移动至指定坐标：X 57 Y -124
+2024-06-14 17:33:23.002 | INFO     | utils.robot:move_to_coords:92 - 移动至指定坐标：X -7 Y -192
+2024-06-14 17:33:34.128 | SUCCESS  | __main__:main:39 - 执行完成
+2024-06-14 18:12:39.374 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 18:12:39.378 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 18:12:39.520 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:12:44.522 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:12:54.810 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 18:12:56.812 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 18:13:00.851 | INFO     | agents:agent_maneger:164 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 18:13:00.852 | INFO     | agents:agent_task_plan:31 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 18:13:08.957 | INFO     | agents:agent_maneger:174 - llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "进行目标检测，确保小猪佩奇和包装盒都被检测到",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "将包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 18:13:08.957 | INFO     | agents:agent_maneger:195 - [95m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 18:15:45.297 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 18:15:45.300 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 18:15:45.440 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:15:50.442 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:15:58.401 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 18:16:00.403 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 18:16:02.474 | INFO     | agents:agent_maneger:164 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 18:16:02.475 | INFO     | agents:agent_task_plan:31 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 18:16:11.044 | INFO     | agents:agent_maneger:174 - llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "对包装盒进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "对小猪佩奇进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "把包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 18:16:11.045 | INFO     | agents:agent_maneger:196 - [95m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 18:18:40.703 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 18:18:40.707 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 18:18:40.847 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:18:45.849 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:18:53.229 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 18:18:55.231 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 18:18:57.944 | INFO     | agents:agent_maneger:165 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 18:18:57.945 | INFO     | agents:agent_task_plan:31 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 18:19:06.748 | INFO     | agents:agent_maneger:175 - llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "对小猪佩奇进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "对包装盒进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "把包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 18:19:06.750 | INFO     | agents:agent_maneger:196 - [95m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 18:20:23.632 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 18:20:23.635 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 18:20:23.772 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:20:28.774 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:20:36.109 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 18:20:38.112 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 18:20:39.472 | INFO     | agents:agent_maneger:165 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 18:20:39.473 | INFO     | agents:agent_task_plan:31 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 18:20:48.083 | INFO     | agents:agent_maneger:175 - llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "对包装盒进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "对小猪佩奇进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "把包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 18:20:48.086 | INFO     | agents:agent_maneger:197 - [95m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 18:25:03.083 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 18:25:03.090 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 18:25:03.226 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:25:08.228 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:25:17.923 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 18:25:19.925 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 18:25:22.875 | INFO     | agents:agent_maneger:165 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 18:25:22.876 | INFO     | agents:agent_maneger:214 - llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "对包装盒进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "对小猪佩奇进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "把包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 18:25:22.877 | INFO     | agents:agent_maneger:236 - [95m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 18:25:44.445 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 18:25:44.448 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 18:25:44.584 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:25:49.587 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:25:57.854 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 18:25:59.856 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 18:26:02.510 | INFO     | agents:agent_maneger:165 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 18:26:02.511 | INFO     | agents:agent_maneger:214 - llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "对包装盒进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "对小猪佩奇进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "把包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 18:26:02.512 | INFO     | agents:agent_maneger:236 - [95m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 18:26:02.512 | INFO     | agents:control_agent:61 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 18:26:05.907 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 18:26:05.914 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 18:26:06.043 | INFO     | agents:exec_code:40 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 18:26:06.781 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:26:09.899 | INFO     | agents:agent_maneger:242 - [95m执行任务 2: 对包装盒进行目标检测, 类型: DETECTION[0m
+2024-06-14 18:26:09.899 | INFO     | agents:detection_agent:125 - [92m
+******detection智能体执行动作******
+[0m
+2024-06-14 18:26:09.900 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:26:12.901 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:26:15.309 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.322 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.343 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.352 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.360 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.373 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.391 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.409 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.423 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.435 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.445 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.458 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.474 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.486 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.505 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.517 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.535 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.548 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.561 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:15.576 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:18.585 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:26:21.593 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:26:23.604 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:23.626 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:23.640 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:23.658 | WARNING  | utils.robot:top_view_shot:137 - 未识别到aruco码
+2024-06-14 18:26:23.743 | SUCCESS  | utils.robot:top_view_shot:151 - 俯拍图像保存至temp/vl_now.jpg
+2024-06-14 18:26:23.759 | INFO     | agents:detection_agent:131 - 尝试第 1 次访问多模态大模型
+2024-06-14 18:26:30.176 | WARNING  | utils.vlm:yi_vision_api:89 - 未找到 JSON 内容
+2024-06-14 18:26:30.177 | DEBUG    | utils.vlm:yi_vision_api:90 - 该任务需要进行目标检测，识别图中物体的名称并找出它们的左上角和右下角的像素坐标。然而，由于图片的分辨率和清晰度，我无法准确地执行此任务。识别和检测任务通常需要高质量的图像和专门的对象识别算法来实现。因此，我无法提供所需的json数据结构。如果图像质量允许，我可以尝试使用图像处理和识别工具来完成这个任务。
+2024-06-14 18:26:30.177 | INFO     | utils.vlm:yi_vision_api:91 - 尝试修复
+2024-06-14 18:26:30.178 | ERROR    | utils.vlm:yi_vision_api:94 -     修复失败
+2024-06-14 18:26:30.178 | SUCCESS  | agents:detection_agent:133 - 多模态大模型调用成功！
+2024-06-14 18:26:30.179 | WARNING  | agents:detection_agent:139 - 多模态大模型返回数据结构错误，再尝试一次
+2024-06-14 18:26:30.180 | INFO     | agents:detection_agent:131 - 尝试第 2 次访问多模态大模型
+2024-06-14 18:26:33.992 | WARNING  | utils.vlm:yi_vision_api:89 - 未找到 JSON 内容
+2024-06-14 18:26:33.993 | DEBUG    | utils.vlm:yi_vision_api:90 - 对不起，我无法提供图片分析服务。如果您有其他问题或需要帮助，请告诉我！
+2024-06-14 18:26:33.993 | INFO     | utils.vlm:yi_vision_api:91 - 尝试修复
+2024-06-14 18:26:33.993 | ERROR    | utils.vlm:yi_vision_api:94 -     修复失败
+2024-06-14 18:26:33.994 | SUCCESS  | agents:detection_agent:133 - 多模态大模型调用成功！
+2024-06-14 18:26:33.994 | WARNING  | agents:detection_agent:139 - 多模态大模型返回数据结构错误，再尝试一次
+2024-06-14 18:26:33.994 | INFO     | agents:detection_agent:131 - 尝试第 3 次访问多模态大模型
+2024-06-14 18:26:41.585 | WARNING  | utils.vlm:yi_vision_api:89 - 未找到 JSON 内容
+2024-06-14 18:26:41.586 | DEBUG    | utils.vlm:yi_vision_api:90 - 根据您的要求，我需要对图像中的物体进行目标检测。然而，由于我的功能限制，我无法直接从图像中提取物体的像素坐标。我建议您使用图像处理软件或编程工具，如OpenCV或PIL，使用它们的对象检测功能来获取这些物体的像素坐标。这些工具通常能够识别图像中的特定对象并返回其边界框，这将有助于您提取所需的坐标数据。
+2024-06-14 18:26:41.586 | INFO     | utils.vlm:yi_vision_api:91 - 尝试修复
+2024-06-14 18:26:41.586 | ERROR    | utils.vlm:yi_vision_api:94 -     修复失败
+2024-06-14 18:26:41.586 | SUCCESS  | agents:detection_agent:133 - 多模态大模型调用成功！
+2024-06-14 18:26:41.587 | WARNING  | agents:detection_agent:139 - 多模态大模型返回数据结构错误，再尝试一次
+2024-06-14 18:26:41.587 | INFO     | agents:detection_agent:131 - 尝试第 4 次访问多模态大模型
+2024-06-14 18:26:46.378 | WARNING  | utils.vlm:yi_vision_api:89 - 未找到 JSON 内容
+2024-06-14 18:26:46.379 | DEBUG    | utils.vlm:yi_vision_api:90 - 对不起，由于图片的模糊度和分辨率，我无法准确地提取出所有物体并给出精确的像素坐标。我的功能基于图像的清晰度和细节丰富度，这张图片的品质不足以支持准确的目标检测。如果您有更高清晰度的图片或更详细的要求，请提供给我，我将尽力为您提供更好的帮助。
+2024-06-14 18:26:46.379 | INFO     | utils.vlm:yi_vision_api:91 - 尝试修复
+2024-06-14 18:26:46.379 | ERROR    | utils.vlm:yi_vision_api:94 -     修复失败
+2024-06-14 18:26:46.380 | SUCCESS  | agents:detection_agent:133 - 多模态大模型调用成功！
+2024-06-14 18:26:46.380 | WARNING  | agents:detection_agent:139 - 多模态大模型返回数据结构错误，再尝试一次
+2024-06-14 18:28:55.164 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 18:28:55.167 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 18:28:55.308 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:29:00.310 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:29:09.150 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 18:29:11.152 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 18:29:12.864 | INFO     | agents:agent_maneger:164 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 18:29:12.865 | INFO     | agents:agent_task_plan:31 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 18:29:23.179 | INFO     | agents:agent_maneger:174 - llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "进行包装盒的目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "进行小猪佩奇的目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "把包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 18:29:23.180 | INFO     | agents:agent_maneger:196 - [95m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 18:29:23.180 | INFO     | agents:control_agent:60 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 18:29:26.764 | ERROR    | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 18:29:26.770 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 18:29:26.840 | INFO     | agents:exec_code:40 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 18:29:27.595 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:29:30.711 | INFO     | agents:agent_maneger:202 - [95m执行任务 2: 进行包装盒的目标检测, 类型: DETECTION[0m
+2024-06-14 18:29:30.712 | INFO     | agents:detection_agent:124 - [92m
+******detection智能体执行动作******
+[0m
+2024-06-14 18:29:30.712 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:29:33.713 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:29:36.129 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.136 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.145 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.157 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.167 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.176 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.184 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.201 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.210 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.221 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.235 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.246 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.261 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.272 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.284 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.296 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.305 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.320 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.339 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:36.348 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:38.354 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 18:29:41.356 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 18:29:44.369 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:44.400 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:44.424 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:44.458 | WARNING  | utils.robot:top_view_shot:138 - 未识别到aruco码
+2024-06-14 18:29:44.530 | SUCCESS  | utils.robot:top_view_shot:152 - 俯拍图像保存至temp/vl_now.jpg
+2024-06-14 18:29:44.546 | INFO     | agents:detection_agent:130 - 尝试第 1 次访问多模态大模型
+2024-06-14 18:30:03.194 | WARNING  | utils.vlm:yi_vision_api:89 - 未找到 JSON 内容
+2024-06-14 18:30:03.195 | DEBUG    | utils.vlm:yi_vision_api:90 - 由于图像中没有包装盒，我无法进行包装盒的目标检测。但是，我可以根据图像中已有的物体进行描述和坐标提取。请注意，由于图像分辨率和物体细节的限制，我的描述可能不完全准确。
+
+根据图像，我们可以识别出以下物体和它们的坐标：
+
+- 篮球：大约左上角坐标为 [149, 58]，右下角坐标为 [278, 345]。
+- 卡通人物：大约左上角坐标为 [346, 460]，右下角坐标为 [551, 898]。
+- 摩托车：大约左上角坐标为 [701, 542]，右下角坐标为 [930, 878]。
+- 贴纸文字：大约左上角坐标为 [434, 162]，右下角坐标为 [833, 426]。
+- 星形贴纸：大约左上角坐标为 [108, 557]，右下角坐标为 [195, 696]。
+
+输出JSON数据结构如下：
+```json
+[
+    {
+        "name": "篮球",
+        "top_left": [149, 58],
+        "right_bottom": [278, 345]
+    },
+    {
+        "name": "卡通人物",
+        "top_left": [346, 460],
+        "right_bottom": [551, 898]
+    },
+    {
+        "name": "摩托车",
+        "top_left": [701, 542],
+        "right_bottom": [930, 878]
+    },
+    {
+        "name": "贴纸文字",
+        "top_left": [434, 162],
+        "right_bottom": [833, 426]
+    },
+    {
+        "name": "星形贴纸",
+        "top_left": [108, 557]
+2024-06-14 18:30:03.196 | INFO     | utils.vlm:yi_vision_api:91 - 尝试修复
+2024-06-14 18:30:03.197 | ERROR    | utils.vlm:yi_vision_api:94 -     修复失败
+2024-06-14 18:30:03.198 | SUCCESS  | agents:detection_agent:132 - 多模态大模型调用成功！
+2024-06-14 18:30:03.198 | WARNING  | agents:detection_agent:138 - 多模态大模型返回数据结构错误，再尝试一次
+2024-06-14 18:30:03.199 | INFO     | agents:detection_agent:130 - 尝试第 2 次访问多模态大模型
+2024-06-14 18:30:15.435 | WARNING  | utils.vlm:yi_vision_api:89 - 未找到 JSON 内容
+2024-06-14 18:30:15.435 | DEBUG    | utils.vlm:yi_vision_api:90 - 根据你的要求，从图中提取并找到目标对象的坐标：
+
+**篮球**：
+- 名称：篮球
+- 左上角坐标：[96, 50]
+- 右下角坐标：[291, 390]
+
+**包装盒**：
+- 名称：包装盒
+- 左上角坐标：[453, 143]
+- 右下角坐标：[813, 455]
+
+**小猪佩奇**：
+- 名称：小猪佩奇
+- 左上角坐标：[343, 473]
+- 右下角坐标：[573, 913]
+
+**摩托车**：
+- 名称：摩托车
+- 左上角坐标：[638, 550]
+- 右下角坐标：[928, 877]
+
+**像素块**：
+- 名称：像素块
+- 左上角坐标：[78, 851]
+- 右下角坐标：[158, 999]
+
+**像素块**：
+- 名称：像素块
+- 左上角坐标：[819, 161]
+- 右下角坐标：[899, 295]
+
+这些是图中的所有物体及其坐标。
+2024-06-14 18:30:15.436 | INFO     | utils.vlm:yi_vision_api:91 - 尝试修复
+2024-06-14 18:30:15.436 | ERROR    | utils.vlm:yi_vision_api:94 -     修复失败
+2024-06-14 18:30:15.437 | SUCCESS  | agents:detection_agent:132 - 多模态大模型调用成功！
+2024-06-14 18:30:15.438 | WARNING  | agents:detection_agent:138 - 多模态大模型返回数据结构错误，再尝试一次
+2024-06-14 18:30:15.438 | INFO     | agents:detection_agent:130 - 尝试第 3 次访问多模态大模型
+2024-06-14 18:30:19.279 | WARNING  | utils.vlm:yi_vision_api:89 - 未找到 JSON 内容
+2024-06-14 18:30:19.279 | DEBUG    | utils.vlm:yi_vision_api:90 - 该图像中没有包装盒，因此无法进行包装盒的目标检测。请提供含有包装盒的图像进行检测。
+2024-06-14 18:30:19.280 | INFO     | utils.vlm:yi_vision_api:91 - 尝试修复
+2024-06-14 18:30:19.280 | ERROR    | utils.vlm:yi_vision_api:94 -     修复失败
+2024-06-14 18:30:19.281 | SUCCESS  | agents:detection_agent:132 - 多模态大模型调用成功！
+2024-06-14 18:30:19.281 | WARNING  | agents:detection_agent:138 - 多模态大模型返回数据结构错误，再尝试一次
+2024-06-14 18:30:19.282 | INFO     | agents:detection_agent:130 - 尝试第 4 次访问多模态大模型
+2024-06-14 18:30:36.608 | WARNING  | utils.vlm:yi_vision_api:89 - 未找到 JSON 内容
+2024-06-14 18:30:36.608 | DEBUG    | utils.vlm:yi_vision_api:90 - 要进行包装盒的目标检测，从图中识别物体并提取坐标。根据提供的图和User_Requirement，我们可以看到几个物体。请允许我逐一分析：
+
+1. 篮球：篮球位于画面的左上角，大约在图片的20%从顶部和18%从左侧开始。
+2. 包装盒：包装盒在图片的右上角，大约从78%从顶部和18%从左侧开始。
+3. 贴纸：贴纸似乎在包装盒的下方，大约从80%从顶部和50%从左侧开始。
+4. 佩奇猪：佩奇猪位于图片中间偏下位置，大约从40%从顶部和50%从左侧开始。
+5. 摩托车：摩托车在图片的右下角，大约从78%从顶部和78%从左侧开始。
+6. 像素图案：有两个像素图案，一个在左下角，一个在右下角。左下角的像素图案大约从10%从顶部和85%从左侧开始；右下角的像素图案大约从78%从顶部和72%从左侧开始。
+
+将这些坐标转换为json格式，如下所示：
+```json
+[
+    {
+        "name": "篮球",
+        "top_left": [0.18, 0.18],
+        "right_bottom": [0.25, 0.34]
+    },
+    {
+        "name": "包装盒",
+        "top_left": [0.78, 0.18],
+        "right_bottom": [0.9, 0.34]
+    },
+    {
+        "name": "贴纸",
+        "top_left": [0.78, 0.43],
+        "right_bottom": [0.9, 0.59]
+    },
+    {
+        "name": "佩奇猪",
+        "top_left": [0.4, 0.43],
+        "right_bottom": [0.55, 0.78]
+    },
+    {
+        "name": "摩托车",
+        "top_left
+2024-06-14 18:30:36.609 | INFO     | utils.vlm:yi_vision_api:91 - 尝试修复
+2024-06-14 18:30:36.609 | ERROR    | utils.vlm:yi_vision_api:94 -     修复失败
+2024-06-14 18:30:36.609 | SUCCESS  | agents:detection_agent:132 - 多模态大模型调用成功！
+2024-06-14 18:30:36.610 | WARNING  | agents:detection_agent:138 - 多模态大模型返回数据结构错误，再尝试一次
+2024-06-14 19:30:32.988 | WARNING  | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:30:32.991 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 19:30:33.126 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:30:38.129 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 19:30:59.011 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 19:31:01.012 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 19:31:02.773 | INFO     | agents:agent_maneger:165 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 19:31:02.774 | INFO     | agents:agent_task_plan:31 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 19:31:11.415 | INFO     | agents:agent_maneger:175 - llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "对小猪佩奇进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "把包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 19:31:11.416 | INFO     | agents:agent_maneger:197 - [95m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 19:31:11.417 | INFO     | agents:control_agent:60 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 19:31:16.635 | WARNING  | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:31:16.649 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 19:31:16.748 | INFO     | agents:exec_code:40 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 19:31:17.494 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:31:20.602 | INFO     | agents:agent_maneger:203 - [95m执行任务 2: 对小猪佩奇进行目标检测, 类型: DETECTION[0m
+2024-06-14 19:31:20.602 | INFO     | agents:detection_agent:124 - [92m
+******detection智能体执行动作******
+[0m
+2024-06-14 19:31:20.603 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:31:23.603 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 19:31:26.045 | SUCCESS  | utils.robot:top_view_shot:152 - 俯拍图像保存至temp/vl_now.jpg
+2024-06-14 19:31:26.059 | INFO     | agents:detection_agent:128 - 访问多模态大模型
+2024-06-14 19:31:26.059 | DEBUG    | agents:detection_agent:131 - 尝试第 1 次访问多模态大模型
+2024-06-14 19:31:31.418 | SUCCESS  | utils.vlm:yi_vision_api:81 - 解析成功！llm生成任务如下：
+[
+    {
+        "name": "小猪佩奇",
+        "top_left": [
+            333,
+            446
+        ],
+        "right_bottom": [
+            575,
+            886
+        ]
+    }
+]
+2024-06-14 19:31:31.419 | SUCCESS  | utils.vlm:yi_vision_api:100 - 大模型调用成功！
+2024-06-14 19:31:31.420 | SUCCESS  | agents:detection_agent:133 - 多模态大模型调用成功！
+2024-06-14 19:31:31.456 | INFO     | agents:agent_maneger:197 - [95m执行任务 3: 把包装盒放到小猪佩奇上, 类型: CONTROL[0m
+2024-06-14 19:31:31.457 | INFO     | agents:control_agent:60 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 19:31:55.839 | WARNING  | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:31:55.845 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 19:31:55.849 | INFO     | agents:exec_code:40 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: [37m# 首先，将机械臂归零[39;49;00m[37m[39;49;00m
+0005: back_zero(mc)[37m[39;49;00m
+0006: [37m[39;49;00m
+0007: [37m# 打开夹爪，准备夹取物体[39;49;00m[37m[39;49;00m
+0008: gripper_open(mc)[37m[39;49;00m
+0009: [37m[39;49;00m
+0010: [37m# 移动到包装盒的位置，并下降到夹取物体的安全高度[39;49;00m[37m[39;49;00m
+0011: [37m# 由于没有提供包装盒的坐标，我们假设有一个变量 package_coord 包含了包装盒的坐标[39;49;00m[37m[39;49;00m
+0012: [37m# 假设 package_coord = [X, Y][39;49;00m[37m[39;49;00m
+0013: move_to_coords(mc, X=package_coord[[34m0[39;49;00m], Y=package_coord[[34m1[39;49;00m])[37m[39;49;00m
+0014: grip_END_SAFE(mc)[37m[39;49;00m
+0015: [37m[39;49;00m
+0016: [37m# 关闭夹爪，夹取物体[39;49;00m[37m[39;49;00m
+0017: gripper_grip(mc)[37m[39;49;00m
+0018: [37m[39;49;00m
+0019: [37m# 夹爪上升到搬运途中的安全高度[39;49;00m[37m[39;49;00m
+0020: grip_HEIGHT_SAFE(mc)[37m[39;49;00m
+0021: [37m[39;49;00m
+0022: [37m# 移动到小猪佩奇的位置[39;49;00m[37m[39;49;00m
+0023: move_to_coords(mc, X=-[34m12[39;49;00m, Y=-[34m187[39;49;00m)[37m[39;49;00m
+0024: [37m[39;49;00m
+0025: [37m# 下降到放置物体的安全高度[39;49;00m[37m[39;49;00m
+0026: grip_END_SAFE(mc)[37m[39;49;00m
+0027: [37m[39;49;00m
+0028: [37m# 打开夹爪，放置物体[39;49;00m[37m[39;49;00m
+0029: gripper_open(mc)[37m[39;49;00m
+0030: [37m[39;49;00m
+0031: [37m# 夹爪上升到搬运途中的安全高度[39;49;00m[37m[39;49;00m
+0032: grip_HEIGHT_SAFE(mc)[37m[39;49;00m
+0033: 
+
+2024-06-14 19:31:56.683 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:32:01.805 | WARNING  | agents:control_agent:87 - 2024-06-14 19:31 | INFO     | robot.py:56 | 机械臂归零
+Traceback (most recent call last):
+  File "<string>", line 14, in <module>
+NameError: name 'package_coord' is not defined
+
+2024-06-14 19:38:15.601 | WARNING  | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:38:15.604 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 19:38:15.744 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:38:20.746 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 19:38:26.550 | INFO     | utils.calibration_assist:calibration_assist:112 - 将从配置文件中读取，请确保点位正确
+2024-06-14 19:38:28.559 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 19:38:31.109 | INFO     | agents:agent_maneger:165 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 19:38:31.110 | INFO     | agents:agent_task_plan:31 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 19:38:39.282 | INFO     | agents:agent_maneger:175 - llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "回到原点",
+        "task_type": "control"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "对包装盒进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "对小猪佩奇进行目标检测",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "把包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 19:38:39.282 | INFO     | agents:agent_maneger:197 - [95m执行任务 1: 回到原点, 类型: CONTROL[0m
+2024-06-14 19:38:39.283 | INFO     | agents:control_agent:60 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 19:38:39.283 | DEBUG    | agents:control_agent:63 - 
+你是我的机械臂助手，机械臂内置了一些函数，请你根据User_Requirement的指令，以python代码输出要运行的对应函数。物体坐标必须是具体数值，且从Objects_coord中获取；Excuted_code是已执行的代码；Context是之前根据User_requirement生成的代码及其报错信息，Context如果不为空，请根据报错信息对代码进行修改，否则生成新的代码。
+# User_Requirement
+回到原点
+#Objects_coord
+{}
+#Excuted_code
+
+#Context
+
+#Context end
+
+
+
+
+【以下是所有内置函数介绍】
+机械臂位置归零，所有关节回到原点：back_zero(mc)
+放松机械臂，所有关节都可以自由手动拖拽活动：relax_arms(mc)
+做出摇头动作：head_shake(mc)
+做出点头动作：head_nod(mc)
+打开夹爪：gripper_open(mc)
+关闭夹爪：gripper_grip(mc)
+移动到指定XY坐标，比如移动到X坐标150，Y坐标-120：move_to_coords(mc,X=150, Y=-120)
+夹爪上升到搬运途中高度：grip_HEIGHT_SAFE(mc)
+夹爪下降到夹取物体时高度：grip_END_SAFE(mc)
+指定关节旋转，比如关节1旋转到60度，总共有6个关节：single_joint_move(mc,1, 60)
+移动至俯视姿态：move_to_top_view(mc)
+拍一张俯视图：top_view_shot(mc)
+开启摄像头，在屏幕上实时显示摄像头拍摄的画面：check_camera()
+拖动示教，我可以拽着机械臂运动，然后机械臂模仿复现出一样的动作：drag_teach(mc)
+【这里是贴士】
+0.一开始机械臂位置要归零
+1.如果要夹取物体，要先打开夹爪
+2.为了夹住物体要先下降到夹取物体时安全高度
+3.为了夹住物体需要关闭夹爪
+4.夹取物体后夹爪上升到搬运途中安全高度
+5.放置完物体后要上升到搬运途中安全高度
+
+每项输出都应是严格意义上的python代码，格式如下所示:
+
+```python
+back_zero(mc)
+head_shake(mc)
+```
+
+2024-06-14 19:38:42.659 | WARNING  | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:38:42.666 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 19:38:42.755 | INFO     | agents:exec_code:40 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: back_zero(mc)[37m[39;49;00m
+0005: 
+
+2024-06-14 19:38:43.552 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:38:46.696 | INFO     | agents:agent_maneger:203 - [95m执行任务 2: 对包装盒进行目标检测, 类型: DETECTION[0m
+2024-06-14 19:38:46.697 | INFO     | agents:detection_agent:124 - [92m
+******detection智能体执行动作******
+[0m
+2024-06-14 19:38:46.697 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:38:49.698 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 19:38:52.143 | SUCCESS  | utils.robot:top_view_shot:152 - 俯拍图像保存至temp/vl_now.jpg
+2024-06-14 19:38:52.169 | INFO     | agents:detection_agent:128 - 访问多模态大模型
+2024-06-14 19:38:52.170 | DEBUG    | agents:detection_agent:131 - 尝试第 1 次访问多模态大模型
+2024-06-14 19:39:05.314 | SUCCESS  | utils.vlm:yi_vision_api:81 - 解析成功！llm生成任务如下：
+[
+    {
+        "name": "包装盒",
+        "top_left": [
+            465,
+            125
+        ],
+        "right_bottom": [
+            845,
+            452
+        ]
+    },
+    {
+        "name": "篮球",
+        "top_left": [
+            184,
+            60
+        ],
+        "right_bottom": [
+            317,
+            364
+        ]
+    },
+    {
+        "name": "摩托车",
+        "top_left": [
+            675,
+            683
+        ],
+        "right_bottom": [
+            961,
+            918
+        ]
+    },
+    {
+        "name": "小猪佩奇",
+        "top_left": [
+            344,
+            497
+        ],
+        "right_bottom": [
+            570,
+            931
+        ]
+    },
+    {
+        "name": "星星",
+        "top_left": [
+            111,
+            562
+        ],
+        "right_bottom": [
+            196,
+            707
+        ]
+    },
+    {
+        "name": "警告标签",
+        "top_left": [
+            906,
+            159
+        ],
+        "right_bottom": [
+            998,
+            341
+        ]
+    }
+]
+2024-06-14 19:39:05.314 | SUCCESS  | utils.vlm:yi_vision_api:100 - 大模型调用成功！
+2024-06-14 19:39:05.315 | SUCCESS  | agents:detection_agent:133 - 多模态大模型调用成功！
+2024-06-14 19:39:05.397 | INFO     | agents:agent_maneger:203 - [95m执行任务 3: 对小猪佩奇进行目标检测, 类型: DETECTION[0m
+2024-06-14 19:39:05.399 | INFO     | agents:detection_agent:124 - [92m
+******detection智能体执行动作******
+[0m
+2024-06-14 19:39:05.399 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:39:08.400 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 19:39:10.862 | SUCCESS  | utils.robot:top_view_shot:152 - 俯拍图像保存至temp/vl_now.jpg
+2024-06-14 19:39:10.879 | INFO     | agents:detection_agent:128 - 访问多模态大模型
+2024-06-14 19:39:10.879 | DEBUG    | agents:detection_agent:131 - 尝试第 1 次访问多模态大模型
+2024-06-14 19:39:20.436 | DEBUG    | utils.vlm:yi_vision_api:89 - 未找到 JSON 内容
+2024-06-14 19:39:20.436 | DEBUG    | utils.vlm:yi_vision_api:90 - [
+    {
+        "name": "小猪佩奇",
+        "top_left": [342, 523],
+        "right_bottom": [555, 958]
+    },
+    {
+        "name": "摩托车",
+        "top_left": [694, 649],
+        "right_bottom": [958, 958]
+    },
+    {
+        "name": "篮球",
+        "top_left": [173, 101],
+        "right_bottom": [305, 401]
+    },
+    {
+        "name": "星星",
+        "top_left": [91, 587],
+        "right_bottom": [166, 740]
+    }
+]
+2024-06-14 19:39:20.436 | DEBUG    | utils.vlm:yi_vision_api:91 - 尝试修复
+2024-06-14 19:39:20.437 | DEBUG    | utils.vlm:yi_vision_api:97 - 修复成功
+2024-06-14 19:39:20.437 | SUCCESS  | agents:detection_agent:133 - 多模态大模型调用成功！
+2024-06-14 19:39:20.484 | INFO     | agents:agent_maneger:197 - [95m执行任务 4: 把包装盒放到小猪佩奇上, 类型: CONTROL[0m
+2024-06-14 19:39:20.485 | INFO     | agents:control_agent:60 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 19:39:20.486 | DEBUG    | agents:control_agent:63 - 
+你是我的机械臂助手，机械臂内置了一些函数，请你根据User_Requirement的指令，以python代码输出要运行的对应函数。物体坐标必须是具体数值，且从Objects_coord中获取；Excuted_code是已执行的代码；Context是之前根据User_requirement生成的代码及其报错信息，Context如果不为空，请根据报错信息对代码进行修改，否则生成新的代码。
+# User_Requirement
+把包装盒放到小猪佩奇上
+#Objects_coord
+{"\u5305\u88c5\u76d2": [47, -123], "\u7bee\u7403": [-63, -116], "\u6469\u6258\u8f66": [92, -215], "\u5c0f\u732a\u4f69\u5947": [-7, -203], "\u661f\u661f": [-92, -190], "\u8b66\u544a\u6807\u7b7e": [123, -116]}
+#Excuted_code
+
+#Context
+
+#Context end
+
+
+
+
+【以下是所有内置函数介绍】
+机械臂位置归零，所有关节回到原点：back_zero(mc)
+放松机械臂，所有关节都可以自由手动拖拽活动：relax_arms(mc)
+做出摇头动作：head_shake(mc)
+做出点头动作：head_nod(mc)
+打开夹爪：gripper_open(mc)
+关闭夹爪：gripper_grip(mc)
+移动到指定XY坐标，比如移动到X坐标150，Y坐标-120：move_to_coords(mc,X=150, Y=-120)
+夹爪上升到搬运途中高度：grip_HEIGHT_SAFE(mc)
+夹爪下降到夹取物体时高度：grip_END_SAFE(mc)
+指定关节旋转，比如关节1旋转到60度，总共有6个关节：single_joint_move(mc,1, 60)
+移动至俯视姿态：move_to_top_view(mc)
+拍一张俯视图：top_view_shot(mc)
+开启摄像头，在屏幕上实时显示摄像头拍摄的画面：check_camera()
+拖动示教，我可以拽着机械臂运动，然后机械臂模仿复现出一样的动作：drag_teach(mc)
+【这里是贴士】
+0.一开始机械臂位置要归零
+1.如果要夹取物体，要先打开夹爪
+2.为了夹住物体要先下降到夹取物体时安全高度
+3.为了夹住物体需要关闭夹爪
+4.夹取物体后夹爪上升到搬运途中安全高度
+5.放置完物体后要上升到搬运途中安全高度
+
+每项输出都应是严格意义上的python代码，格式如下所示:
+
+```python
+back_zero(mc)
+head_shake(mc)
+```
+
+2024-06-14 19:39:33.947 | WARNING  | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:39:33.953 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 19:39:33.957 | INFO     | agents:exec_code:40 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: [37m# 机械臂归零[39;49;00m[37m[39;49;00m
+0005: back_zero(mc)[37m[39;49;00m
+0006: [37m[39;49;00m
+0007: [37m# 打开夹爪[39;49;00m[37m[39;49;00m
+0008: gripper_open(mc)[37m[39;49;00m
+0009: [37m[39;49;00m
+0010: [37m# 移动到包装盒位置并下降到夹取物体时的高度[39;49;00m[37m[39;49;00m
+0011: move_to_coords(mc, X=[34m47[39;49;00m, Y=-[34m123[39;49;00m)[37m[39;49;00m
+0012: grip_END_SAFE(mc)[37m[39;49;00m
+0013: [37m[39;49;00m
+0014: [37m# 夹取包装盒[39;49;00m[37m[39;49;00m
+0015: gripper_grip(mc)[37m[39;49;00m
+0016: [37m[39;49;00m
+0017: [37m# 上升到搬运途中的安全高度[39;49;00m[37m[39;49;00m
+0018: grip_HEIGHT_SAFE(mc)[37m[39;49;00m
+0019: [37m[39;49;00m
+0020: [37m# 移动到小猪佩奇位置并下降到放置物体时的高度[39;49;00m[37m[39;49;00m
+0021: move_to_coords(mc, X=-[34m7[39;49;00m, Y=-[34m203[39;49;00m)[37m[39;49;00m
+0022: grip_END_SAFE(mc)[37m[39;49;00m
+0023: [37m[39;49;00m
+0024: [37m# 放下包装盒[39;49;00m[37m[39;49;00m
+0025: gripper_open(mc)[37m[39;49;00m
+0026: [37m[39;49;00m
+0027: [37m# 上升到搬运途中的安全高度[39;49;00m[37m[39;49;00m
+0028: grip_HEIGHT_SAFE(mc)[37m[39;49;00m
+0029: 
+
+2024-06-14 19:39:34.683 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:39:39.685 | INFO     | utils.robot:move_to_coords:92 - 移动至指定坐标：X 47 Y -123
+2024-06-14 19:39:50.690 | INFO     | utils.robot:move_to_coords:92 - 移动至指定坐标：X -7 Y -203
+2024-06-14 19:40:01.805 | SUCCESS  | __main__:main:39 - 执行完成
+2024-06-14 19:42:44.765 | WARNING  | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:42:44.769 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 19:42:44.907 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:42:49.909 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 19:43:00.274 | INFO     | utils.calibration_assist:calibration_assist:123 - 开始标定
+2024-06-14 19:43:03.695 | INFO     | utils.robot:relax_arms:61 - 放松机械臂关节
+2024-06-14 19:43:03.697 | INFO     | Calibrator:get_robotic_arm_coord:122 - 请将机械臂夹爪移至第标定点1
+2024-06-14 19:43:03.698 | INFO     | Calibrator:get_robotic_arm_coord:123 - 完成请输入'y':
+2024-06-14 19:43:31.036 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:43:41.454 | INFO     | utils.robot:relax_arms:61 - 放松机械臂关节
+2024-06-14 19:43:41.456 | INFO     | Calibrator:get_robotic_arm_coord:122 - 请将机械臂夹爪移至第标定点2
+2024-06-14 19:43:41.456 | INFO     | Calibrator:get_robotic_arm_coord:123 - 完成请输入'y':
+2024-06-14 19:44:26.873 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:44:31.875 | SUCCESS  | Calibrator:get_robotic_arm_coord:145 - 完成标定
+2024-06-14 19:44:33.877 | SUCCESS  | utils.calibration_assist:calibration_assist:132 - 标定完成
+2024-06-14 19:44:37.048 | INFO     | agents:agent_maneger:165 - [95m
+******Agent智能体启动******
+[0m
+2024-06-14 19:44:37.049 | INFO     | agents:agent_task_plan:31 - [92m
+******Agent智能体编排任务******
+[0m
+2024-06-14 19:44:47.889 | INFO     | agents:agent_maneger:175 - llm生成任务如下：
+[
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "执行目标检测，确保检测到包装盒和摩托车",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "控制机械臂将包装盒放到摩托车上",
+        "task_type": "control"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "执行目标检测，确保检测到包装盒和小猪佩奇",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "控制机械臂将包装盒放到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+2024-06-14 19:44:47.890 | INFO     | agents:agent_maneger:203 - [95m执行任务 1: 执行目标检测，确保检测到包装盒和摩托车, 类型: DETECTION[0m
+2024-06-14 19:44:47.891 | INFO     | agents:detection_agent:124 - [92m
+******detection智能体执行动作******
+[0m
+2024-06-14 19:44:47.892 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:44:50.893 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 19:44:53.335 | SUCCESS  | utils.robot:top_view_shot:152 - 俯拍图像保存至temp/vl_now.jpg
+2024-06-14 19:44:53.349 | INFO     | agents:detection_agent:128 - 访问多模态大模型
+2024-06-14 19:44:53.349 | DEBUG    | agents:detection_agent:131 - 尝试第 1 次访问多模态大模型
+2024-06-14 19:45:04.018 | SUCCESS  | utils.vlm:yi_vision_api:81 - llm生成任务如下：
+[
+    {
+        "name": "包装盒",
+        "top_left": [
+            477,
+            103,
+            853,
+            450
+        ],
+        "right_bottom": [
+            479,
+            229,
+            859,
+            450
+        ]
+    },
+    {
+        "name": "摩托车",
+        "top_left": [
+            669,
+            539,
+            963,
+            848
+        ],
+        "right_bottom": [
+            679,
+            759,
+            963,
+            848
+        ]
+    }
+]
+2024-06-14 19:45:04.018 | SUCCESS  | utils.vlm:yi_vision_api:100 - 大模型调用成功！
+2024-06-14 19:45:04.019 | SUCCESS  | agents:detection_agent:133 - 多模态大模型调用成功！
+2024-06-14 19:45:04.020 | DEBUG    | agents:detection_agent:144 - 格式错误
+2024-06-14 19:45:04.020 | DEBUG    | agents:detection_agent:131 - 尝试第 2 次访问多模态大模型
+2024-06-14 19:45:12.494 | SUCCESS  | utils.vlm:yi_vision_api:81 - llm生成任务如下：
+[
+    {
+        "name": "包装盒",
+        "top_left": [
+            478,
+            68
+        ],
+        "right_bottom": [
+            857,
+            506
+        ]
+    },
+    {
+        "name": "摩托车",
+        "top_left": [
+            677,
+            544
+        ],
+        "right_bottom": [
+            961,
+            876
+        ]
+    }
+]
+2024-06-14 19:45:12.505 | SUCCESS  | utils.vlm:yi_vision_api:100 - 大模型调用成功！
+2024-06-14 19:45:12.506 | SUCCESS  | agents:detection_agent:133 - 多模态大模型调用成功！
+2024-06-14 19:45:12.536 | INFO     | agents:agent_maneger:197 - [95m执行任务 2: 控制机械臂将包装盒放到摩托车上, 类型: CONTROL[0m
+2024-06-14 19:45:12.537 | INFO     | agents:control_agent:60 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 19:45:12.537 | DEBUG    | agents:control_agent:63 - 
+你是我的机械臂助手，机械臂内置了一些函数，请你根据User_Requirement的指令，以python代码输出要运行的对应函数。物体坐标必须是具体数值，且从Objects_coord中获取；Excuted_code是已执行的代码；Context是之前根据User_requirement生成的代码及其报错信息，Context如果不为空，请根据报错信息对代码进行修改，否则生成新的代码。
+# User_Requirement
+控制机械臂将包装盒放到摩托车上
+#Objects_coord
+{"\u5305\u88c5\u76d2": [52, -133], "\u6469\u6258\u8f66": [93, -206]}
+#Excuted_code
+
+#Context
+
+#Context end
+
+
+
+
+【以下是所有内置函数介绍】
+机械臂位置归零，所有关节回到原点：back_zero(mc)
+放松机械臂，所有关节都可以自由手动拖拽活动：relax_arms(mc)
+做出摇头动作：head_shake(mc)
+做出点头动作：head_nod(mc)
+打开夹爪：gripper_open(mc)
+关闭夹爪：gripper_grip(mc)
+移动到指定XY坐标，比如移动到X坐标150，Y坐标-120：move_to_coords(mc,X=150, Y=-120)
+夹爪上升到搬运途中高度：grip_HEIGHT_SAFE(mc)
+夹爪下降到夹取物体时高度：grip_END_SAFE(mc)
+指定关节旋转，比如关节1旋转到60度，总共有6个关节：single_joint_move(mc,1, 60)
+移动至俯视姿态：move_to_top_view(mc)
+拍一张俯视图：top_view_shot(mc)
+开启摄像头，在屏幕上实时显示摄像头拍摄的画面：check_camera()
+拖动示教，我可以拽着机械臂运动，然后机械臂模仿复现出一样的动作：drag_teach(mc)
+【这里是贴士】
+0.一开始机械臂位置要归零
+1.如果要夹取物体，要先打开夹爪
+2.为了夹住物体要先下降到夹取物体时安全高度
+3.为了夹住物体需要关闭夹爪
+4.夹取物体后夹爪上升到搬运途中安全高度
+5.放置完物体后要上升到搬运途中安全高度
+
+每项输出都应是严格意义上的python代码，格式如下所示:
+
+```python
+back_zero(mc)
+head_shake(mc)
+```
+
+2024-06-14 19:45:24.722 | WARNING  | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:45:24.729 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 19:45:24.797 | INFO     | agents:exec_code:40 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: [37m# 假设'mc'是机械臂控制对象的实例[39;49;00m[37m[39;49;00m
+0005: [37m[39;49;00m
+0006: [37m# 机械臂归零[39;49;00m[37m[39;49;00m
+0007: back_zero(mc)[37m[39;49;00m
+0008: [37m[39;49;00m
+0009: [37m# 移动到包装盒的位置[39;49;00m[37m[39;49;00m
+0010: move_to_coords(mc, X=[34m52[39;49;00m, Y=-[34m133[39;49;00m)[37m[39;49;00m
+0011: [37m[39;49;00m
+0012: [37m# 打开夹爪[39;49;00m[37m[39;49;00m
+0013: gripper_open(mc)[37m[39;49;00m
+0014: [37m[39;49;00m
+0015: [37m# 夹爪下降到夹取物体时的高度[39;49;00m[37m[39;49;00m
+0016: grip_END_SAFE(mc)[37m[39;49;00m
+0017: [37m[39;49;00m
+0018: [37m# 关闭夹爪，夹取物体[39;49;00m[37m[39;49;00m
+0019: gripper_grip(mc)[37m[39;49;00m
+0020: [37m[39;49;00m
+0021: [37m# 夹爪上升到搬运途中安全高度[39;49;00m[37m[39;49;00m
+0022: grip_HEIGHT_SAFE(mc)[37m[39;49;00m
+0023: [37m[39;49;00m
+0024: [37m# 移动到摩托车的位置[39;49;00m[37m[39;49;00m
+0025: move_to_coords(mc, X=[34m93[39;49;00m, Y=-[34m206[39;49;00m)[37m[39;49;00m
+0026: [37m[39;49;00m
+0027: [37m# 夹爪下降到放置物体的高度[39;49;00m[37m[39;49;00m
+0028: grip_END_SAFE(mc)[37m[39;49;00m
+0029: [37m[39;49;00m
+0030: [37m# 打开夹爪，放置物体[39;49;00m[37m[39;49;00m
+0031: gripper_open(mc)[37m[39;49;00m
+0032: [37m[39;49;00m
+0033: [37m# 夹爪上升到搬运途中安全高度[39;49;00m[37m[39;49;00m
+0034: grip_HEIGHT_SAFE(mc)[37m[39;49;00m
+0035: 
+
+2024-06-14 19:45:25.508 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:45:28.509 | INFO     | utils.robot:move_to_coords:92 - 移动至指定坐标：X 52 Y -133
+2024-06-14 19:45:41.518 | INFO     | utils.robot:move_to_coords:92 - 移动至指定坐标：X 93 Y -206
+2024-06-14 19:45:52.638 | INFO     | agents:agent_maneger:203 - [95m执行任务 3: 执行目标检测，确保检测到包装盒和小猪佩奇, 类型: DETECTION[0m
+2024-06-14 19:45:52.638 | INFO     | agents:detection_agent:124 - [92m
+******detection智能体执行动作******
+[0m
+2024-06-14 19:45:52.639 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:45:55.639 | INFO     | utils.robot:move_to_top_view:103 - 移动至俯视姿态
+2024-06-14 19:45:58.092 | SUCCESS  | utils.robot:top_view_shot:152 - 俯拍图像保存至temp/vl_now.jpg
+2024-06-14 19:45:58.109 | INFO     | agents:detection_agent:128 - 访问多模态大模型
+2024-06-14 19:45:58.109 | DEBUG    | agents:detection_agent:131 - 尝试第 1 次访问多模态大模型
+2024-06-14 19:46:04.965 | SUCCESS  | utils.vlm:yi_vision_api:81 - llm生成任务如下：
+[
+    {
+        "name": "包装盒",
+        "top_left": [
+            636,
+            562
+        ],
+        "right_bottom": [
+            999,
+            996
+        ]
+    },
+    {
+        "name": "小猪佩奇",
+        "top_left": [
+            332,
+            491
+        ],
+        "right_bottom": [
+            583,
+            916
+        ]
+    }
+]
+2024-06-14 19:46:04.969 | SUCCESS  | utils.vlm:yi_vision_api:100 - 大模型调用成功！
+2024-06-14 19:46:04.969 | SUCCESS  | agents:detection_agent:133 - 多模态大模型调用成功！
+2024-06-14 19:46:05.005 | INFO     | agents:agent_maneger:197 - [95m执行任务 4: 控制机械臂将包装盒放到小猪佩奇上, 类型: CONTROL[0m
+2024-06-14 19:46:05.006 | INFO     | agents:control_agent:60 - [92m
+******control智能体执行动作******
+[0m
+2024-06-14 19:46:05.006 | DEBUG    | agents:control_agent:63 - 
+你是我的机械臂助手，机械臂内置了一些函数，请你根据User_Requirement的指令，以python代码输出要运行的对应函数。物体坐标必须是具体数值，且从Objects_coord中获取；Excuted_code是已执行的代码；Context是之前根据User_requirement生成的代码及其报错信息，Context如果不为空，请根据报错信息对代码进行修改，否则生成新的代码。
+# User_Requirement
+控制机械臂将包装盒放到小猪佩奇上
+#Objects_coord
+{"\u5305\u88c5\u76d2": [93, -218], "\u6469\u6258\u8f66": [93, -206], "\u5c0f\u732a\u4f69\u5947": [-4, -205]}
+#Excuted_code
+
+#Context
+
+#Context end
+
+
+
+
+【以下是所有内置函数介绍】
+机械臂位置归零，所有关节回到原点：back_zero(mc)
+放松机械臂，所有关节都可以自由手动拖拽活动：relax_arms(mc)
+做出摇头动作：head_shake(mc)
+做出点头动作：head_nod(mc)
+打开夹爪：gripper_open(mc)
+关闭夹爪：gripper_grip(mc)
+移动到指定XY坐标，比如移动到X坐标150，Y坐标-120：move_to_coords(mc,X=150, Y=-120)
+夹爪上升到搬运途中高度：grip_HEIGHT_SAFE(mc)
+夹爪下降到夹取物体时高度：grip_END_SAFE(mc)
+指定关节旋转，比如关节1旋转到60度，总共有6个关节：single_joint_move(mc,1, 60)
+移动至俯视姿态：move_to_top_view(mc)
+拍一张俯视图：top_view_shot(mc)
+开启摄像头，在屏幕上实时显示摄像头拍摄的画面：check_camera()
+拖动示教，我可以拽着机械臂运动，然后机械臂模仿复现出一样的动作：drag_teach(mc)
+【这里是贴士】
+0.一开始机械臂位置要归零
+1.如果要夹取物体，要先打开夹爪
+2.为了夹住物体要先下降到夹取物体时安全高度
+3.为了夹住物体需要关闭夹爪
+4.夹取物体后夹爪上升到搬运途中安全高度
+5.放置完物体后要上升到搬运途中安全高度
+
+每项输出都应是严格意义上的python代码，格式如下所示:
+
+```python
+back_zero(mc)
+head_shake(mc)
+```
+
+2024-06-14 19:46:16.785 | WARNING  | utils.robot:get_device_path:34 - No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:46:16.792 | SUCCESS  | utils.robot:get_robot_port:46 - find device : [94m/dev/ttyACM1[0m
+2024-06-14 19:46:16.799 | INFO     | agents:exec_code:40 - 
+0001: [34mfrom[39;49;00m [04m[36mpymycobot[39;49;00m[04m[36m.[39;49;00m[04m[36mmycobot[39;49;00m [34mimport[39;49;00m MyCobot[37m[39;49;00m
+0002: [34mfrom[39;49;00m [04m[36mutils[39;49;00m[04m[36m.[39;49;00m[04m[36mrobot[39;49;00m [34mimport[39;49;00m *[37m[39;49;00m
+0003: mc = MyCobot([33m'[39;49;00m[33m/dev/ttyACM1[39;49;00m[33m'[39;49;00m,[34m115200[39;49;00m)[37m[39;49;00m
+0004: [37m# 假定 mc 是机械臂控制对象的实例[39;49;00m[37m[39;49;00m
+0005: [37m[39;49;00m
+0006: [37m# 1. 归零机械臂位置[39;49;00m[37m[39;49;00m
+0007: back_zero(mc)[37m[39;49;00m
+0008: [37m[39;49;00m
+0009: [37m# 2. 移动到包装盒的位置[39;49;00m[37m[39;49;00m
+0010: move_to_coords(mc, X=[34m93[39;49;00m, Y=-[34m218[39;49;00m)[37m[39;49;00m
+0011: [37m[39;49;00m
+0012: [37m# 3. 打开夹爪[39;49;00m[37m[39;49;00m
+0013: gripper_open(mc)[37m[39;49;00m
+0014: [37m[39;49;00m
+0015: [37m# 4. 下降到夹取物体时的高度[39;49;00m[37m[39;49;00m
+0016: grip_END_SAFE(mc)[37m[39;49;00m
+0017: [37m[39;49;00m
+0018: [37m# 5. 关闭夹爪以夹住物体[39;49;00m[37m[39;49;00m
+0019: gripper_grip(mc)[37m[39;49;00m
+0020: [37m[39;49;00m
+0021: [37m# 6. 夹爪上升到搬运途中的安全高度[39;49;00m[37m[39;49;00m
+0022: grip_HEIGHT_SAFE(mc)[37m[39;49;00m
+0023: [37m[39;49;00m
+0024: [37m# 7. 移动到小猪佩奇的位置[39;49;00m[37m[39;49;00m
+0025: move_to_coords(mc, X=-[34m4[39;49;00m, Y=-[34m205[39;49;00m)[37m[39;49;00m
+0026: [37m[39;49;00m
+0027: [37m# 8. 下降到放置物体的高度[39;49;00m[37m[39;49;00m
+0028: grip_END_SAFE(mc)[37m[39;49;00m
+0029: [37m[39;49;00m
+0030: [37m# 9. 打开夹爪，放置物体[39;49;00m[37m[39;49;00m
+0031: gripper_open(mc)[37m[39;49;00m
+0032: [37m[39;49;00m
+0033: [37m# 10. 夹爪上升到搬运途中的安全高度[39;49;00m[37m[39;49;00m
+0034: grip_HEIGHT_SAFE(mc)[37m[39;49;00m
+0035: 
+
+2024-06-14 19:46:17.564 | INFO     | utils.robot:back_zero:56 - 机械臂归零
+2024-06-14 19:46:20.565 | INFO     | utils.robot:move_to_coords:92 - 移动至指定坐标：X 93 Y -218
+2024-06-14 19:46:33.571 | INFO     | utils.robot:move_to_coords:92 - 移动至指定坐标：X -4 Y -205
+2024-06-14 19:46:44.710 | SUCCESS  | __main__:main:39 - 执行完成

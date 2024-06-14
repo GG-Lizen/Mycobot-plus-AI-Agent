@@ -2,6 +2,7 @@
 import cv2
 from utils.robot import *
 from pymycobot.mycobot import MyCobot
+from logs import logger
 class Calibrator():
     def __init__(self, camera_x=150, camera_y=-10):
          # choose place to set cube
@@ -118,12 +119,12 @@ class Calibrator():
             user_input = input("即将释放机械臂，请扶好机械臂，扶好请输入'y':")
             if user_input == 'y':
                 relax_arms(mc)
-            print(f"请将机械臂夹爪移至第标定点{cali_num+1}")
-            print("完成请输入'y':")
+            logger.info(f"请将机械臂夹爪移至第标定点{cali_num+1}")
+
 
             while (1):
                 # 模拟某种条件检测，可以根据需要调整
-                user_input=input()
+                user_input=input("完成请输入'y':")
                 coords = mc.get_coords()
                 if user_input=='y':
                     if cali_num == 0:
@@ -138,14 +139,13 @@ class Calibrator():
                     time.sleep(2)
                     break
                 else :
-                    print("无效输入")
+                    logger.warning("无效输入")
 
             if cali_num == 2:
-                print("完成标定")
                 break    
 
         if cali_num != 2:
-            print("程序异常终止")
+            logger.error("程序异常终止")
         
         # cv2.destroyAllWindows()
     def eye2hand(self,X_im=160, Y_im=120):

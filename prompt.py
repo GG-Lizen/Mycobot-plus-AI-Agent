@@ -66,7 +66,7 @@ LED灯改变颜色，比如：llm_led('帮我把LED灯的颜色改为贝加尔�
 
 【我现在的指令是】
 '''
-TASK_TYPE="""
+TASK_TYPE_PROMPT="""
 以下为所有任务类型及其解释：
 [
     {
@@ -117,14 +117,19 @@ TASK_SYS_PROMPT="""
 
 
 CONTROL_SYS_PROMT="""
-你是我的机械臂助手，机械臂内置了一些函数，请你根据User_Requirement的指令，以python代码输出要运行的对应函数。物体坐标必须是具体数值，且从Objects_coord中获取。Context是之前根据User_requirement生成的代码及其报错信息，Context如果不为空，请根据报错信息对代码进行修改，否则生成新的代码。
+你是我的机械臂助手，机械臂内置了一些函数，请你根据User_Requirement的指令，以python代码输出要运行的对应函数。物体坐标必须是具体数值，且从Objects_coord中获取；Excuted_code是已执行的代码；Context是之前根据User_requirement生成的代码及其报错信息，Context如果不为空，请根据报错信息对代码进行修改，否则生成新的代码。
 # User_Requirement
 {user_requirement}
 #Objects_coord
 {objects_coord}
+#Excuted_code
+{excuted_code}
 #Context
 {context}
 #Context end
+
+
+
 
 【以下是所有内置函数介绍】
 机械臂位置归零，所有关节回到原点：back_zero(mc)
@@ -177,7 +182,7 @@ DETECTION_OUTPUT_FORMAT="""
 name:物体名称,从User_Requirement中提取
 top_left:左上角的像素二维坐标
 right_bottom:右下角的像素二维坐标
-每项输出都应是严格意义上的物体列表，采用 json 格式，如下所示:
+每项输出都应是严格意义上的物体列表，采用 json 格式，必须严格按照如下格式返回结果:
 ```json
 [
     {

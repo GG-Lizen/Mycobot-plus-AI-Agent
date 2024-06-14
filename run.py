@@ -10,6 +10,7 @@ from agents import *
 from utils.calibration_assist import *
 from utils.asr import *
 from utils.tts import *
+from logs import logger
 import configparser
 # 创建一个 ConfigParser 对象
 config = configparser.ConfigParser()
@@ -32,11 +33,10 @@ def main():
     elif start_record_ok == 'k':
         order = input('请输入指令')
     elif start_record_ok == 'c':
-        order = '先回到原点，然后把包装盒放到小猪佩奇上'
-    # top_view_shot(mc,detector,order)
+        order = '首先把包装盒放到摩托车上，然后再把包装盒放到小猪佩奇上'
     agent_maneger(mc,detector,order)
-    print("执行完成")
 
+    logger.success("执行完成")
 
 if __name__== "__main__" :
     main()

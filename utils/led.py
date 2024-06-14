@@ -3,7 +3,7 @@
 # 大模型控制LED灯颜色
 
 from utils.llm import *
-
+from logs import logger
 
 
 # 备选颜色
@@ -31,10 +31,10 @@ def llm_led(mc,PROMPT_LED='帮我把LED灯的颜色改为贝加尔湖的颜色')
         
             # 设置LED灯的RGB颜色
             mc.set_color(rgb_tuple[0], rgb_tuple[1], rgb_tuple[2])
-            print('LED灯颜色修改成功', rgb_tuple)
+            logger.success('LED灯颜色修改成功', rgb_tuple)
 
             break
             
         except Exception as e:
-            print('大模型返回json结构错误，再尝试一次', e)
+            logger.erroe('大模型返回json结构错误，再尝试一次', e)
             n += 1

@@ -119,40 +119,57 @@ python run.py
 命令行输出：
 
 ```
-机械臂归零
-移动至俯视姿态
-是否进行机械臂标定，输入'n'取消:n
-将从配置文件中读取，请确保点位正确
-标定完成
+$ python run.py 
+ls: cannot access '/dev/ttyUSB*': No such file or directory
+2024-06-14 19:42 | WARNING  | robot.py:34 | No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:42 | SUCCESS  | robot.py:46 | find device : /dev/ttyACM1
+2024-06-14 19:42 | INFO     | robot.py:56 | 机械臂归零
+2024-06-14 19:42 | INFO     | robot.py:103 | 移动至俯视姿态
+是否进行机械臂标定，输入'n'取消:y
+2024-06-14 19:43 | INFO     | calibration_assist.py:123 | 开始标定
+即将释放机械臂，请扶好机械臂，扶好请输入'y':y
+2024-06-14 19:43 | INFO     | robot.py:61 | 放松机械臂关节
+2024-06-14 19:43 | INFO     | Calibrator.py:122 | 请将机械臂夹爪移至第标定点1
+2024-06-14 19:43 | INFO     | Calibrator.py:123 | 完成请输入'y':
+y
+2024-06-14 19:43 | INFO     | robot.py:56 | 机械臂归零
+即将释放机械臂，请扶好机械臂，扶好请输入'y':y
+2024-06-14 19:43 | INFO     | robot.py:61 | 放松机械臂关节
+2024-06-14 19:43 | INFO     | Calibrator.py:122 | 请将机械臂夹爪移至第标定点2
+2024-06-14 19:43 | INFO     | Calibrator.py:123 | 完成请输入'y':
+y
+2024-06-14 19:44 | INFO     | robot.py:56 | 机械臂归零
+2024-06-14 19:44 | SUCCESS  | Calibrator.py:145 | 完成标定
+2024-06-14 19:44 | SUCCESS  | calibration_assist.py:132 | 标定完成
 是否开启录音，按r开始录制，按k打字输入，按c输入默认指令:c
-
+2024-06-14 19:44 | INFO     | agents.py:165 | 
 ******Agent智能体启动******
 
-
+2024-06-14 19:44 | INFO     | agents.py:31 | 
 ******Agent智能体编排任务******
 
-解析成功！llm生成任务如下：
+2024-06-14 19:44 | INFO     | agents.py:175 | llm生成任务如下：
 [
     {
         "task_id": "1",
         "dependent_task_ids": [],
-        "instruction": "回到原点",
-        "task_type": "control"
+        "instruction": "执行目标检测，确保检测到包装盒和摩托车",
+        "task_type": "detection"
     },
     {
         "task_id": "2",
         "dependent_task_ids": [
             "1"
         ],
-        "instruction": "对包装盒进行目标检测",
-        "task_type": "detection"
+        "instruction": "控制机械臂将包装盒放到摩托车上",
+        "task_type": "control"
     },
     {
         "task_id": "3",
         "dependent_task_ids": [
             "2"
         ],
-        "instruction": "对小猪佩奇进行目标检测",
+        "instruction": "执行目标检测，确保检测到包装盒和小猪佩奇",
         "task_type": "detection"
     },
     {
@@ -160,146 +177,201 @@ python run.py
         "dependent_task_ids": [
             "3"
         ],
-        "instruction": "将包装盒放到小猪佩奇上",
+        "instruction": "控制机械臂将包装盒放到小猪佩奇上",
         "task_type": "control"
     }
 ]
-执行任务 1: 回到原点, 类型: CONTROL
-
-******control智能体执行动作******
-
-0001: from pymycobot.mycobot import MyCobot
-0002: from utils.robot import *
-0003: mc = MyCobot('/dev/ttyACM0',115200)
-0004: back_zero(mc)
-0005: 
-
-执行任务 2: 对包装盒进行目标检测, 类型: DETECTION
-
+2024-06-14 19:44 | INFO     | agents.py:203 | 执行任务 1: 执行目标检测，确保检测到包装盒和摩托车, 类型: DETECTION
+2024-06-14 19:44 | INFO     | agents.py:124 | 
 ******detection智能体执行动作******
 
-拍摄俯视图
-机械臂归零
-移动至俯视姿态
-机械臂归零
-移动至俯视姿态
-    保存至temp/vl_now.jpg
-将图片输入给多模态视觉大模型
-    尝试第 1 次访问多模态大模型
-未找到 JSON 内容
+2024-06-14 19:44 | INFO     | robot.py:56 | 机械臂归零
+2024-06-14 19:44 | INFO     | robot.py:103 | 移动至俯视姿态
+2024-06-14 19:44 | SUCCESS  | robot.py:152 | 俯拍图像保存至temp/vl_now.jpg
+2024-06-14 19:44 | INFO     | agents.py:128 | 访问多模态大模型
+2024-06-14 19:45 | SUCCESS  | vlm.py:81 | llm识别结果如下：
 [
     {
         "name": "包装盒",
-        "top_left": [667, 615],
-        "right_bottom": [999, 859]
+        "top_left": [
+            477,
+            103,
+            853,
+            450
+        ],
+        "right_bottom": [
+            479,
+            229,
+            859,
+            450
+        ]
+    },
+    {
+        "name": "摩托车",
+        "top_left": [
+            669,
+            539,
+            963,
+            848
+        ],
+        "right_bottom": [
+            679,
+            759,
+            963,
+            848
+        ]
     }
 ]
-    尝试修复
-    修复成功
-    多模态大模型调用成功！
-{'包装盒': (95, -204)}
-执行任务 3: 对小猪佩奇进行目标检测, 类型: DETECTION
-
-******detection智能体执行动作******
-
-拍摄俯视图
-机械臂归零
-移动至俯视姿态
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-未识别到aruco码
-机械臂归零
-移动至俯视姿态
-未识别到aruco码
-    保存至temp/vl_now.jpg
-将图片输入给多模态视觉大模型
-    尝试第 1 次访问多模态大模型
-未找到 JSON 内容
+2024-06-14 19:45 | SUCCESS  | agents.py:133 | 多模态大模型调用成功！
+2024-06-14 19:45 | SUCCESS  | vlm.py:81 | llm识别结果如下：
 [
     {
-        "name": "小猪佩奇",
-        "top_left": [355, 489],
-        "right_bottom": [577, 877]
+        "name": "包装盒",
+        "top_left": [
+            478,
+            68
+        ],
+        "right_bottom": [
+            857,
+            506
+        ]
     },
     {
-        "name": "篮球",
-        "top_left": [129, 125],
-        "right_bottom": [297, 390]
-    },
-    {
-        "name": "星星",
-        "top_left": [119, 543],
-        "right_bottom": [232, 663]
-    },
-    {
-        "name": "警告",
-        "top_left": [722, 691],
-        "right_bottom": [990, 821]
+        "name": "摩托车",
+        "top_left": [
+            677,
+            544
+        ],
+        "right_bottom": [
+            961,
+            876
+        ]
     }
 ]
-    尝试修复
-    修复成功
-    多模态大模型调用成功！
-{'包装盒': (95, -204), '小猪佩奇': (1, -195)}
-{'包装盒': (95, -204), '小猪佩奇': (1, -195), '篮球': (-63, -120)}
-{'包装盒': (95, -204), '小猪佩奇': (1, -195), '篮球': (-63, -120), '星星': (-72, -181)}
-{'包装盒': (95, -204), '小猪佩奇': (1, -195), '篮球': (-63, -120), '星星': (-72, -181), '警告': (101, -208)}
-执行任务 4: 将包装盒放到小猪佩奇上, 类型: CONTROL
-
+2024-06-14 19:45 | SUCCESS  | agents.py:133 | 多模态大模型调用成功！
+2024-06-14 19:45 | INFO     | agents.py:197 | 执行任务 2: 控制机械臂将包装盒放到摩托车上, 类型: CONTROL
+2024-06-14 19:45 | INFO     | agents.py:60 | 
 ******control智能体执行动作******
 
+ls: cannot access '/dev/ttyUSB*': No such file or directory
+2024-06-14 19:45 | WARNING  | robot.py:34 | No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:45 | SUCCESS  | robot.py:46 | find device : /dev/ttyACM1
+2024-06-14 19:45 | INFO     | agents.py:40 | 
 0001: from pymycobot.mycobot import MyCobot
 0002: from utils.robot import *
-0003: mc = MyCobot('/dev/ttyACM0',115200)
-0004: # 假设mc是机械臂的实例
+0003: mc = MyCobot('/dev/ttyACM1',115200)
+0004: # 假设'mc'是机械臂控制对象的实例
 0005: 
-0006: # 0. 一开始机械臂位置要归零
+0006: # 机械臂归零
 0007: back_zero(mc)
 0008: 
-0009: # 1. 打开夹爪
-0010: gripper_open(mc)
+0009: # 移动到包装盒的位置
+0010: move_to_coords(mc, X=52, Y=-133)
 0011: 
-0012: # 2. 移动到包装盒的位置，并下降到夹取物体时的安全高度
-0013: move_to_coords(mc, X=95, Y=-204)
-0014: grip_END_SAFE(mc)
-0015: 
-0016: # 3. 关闭夹爪，夹住包装盒
-0017: gripper_grip(mc)
-0018: 
-0019: # 4. 夹爪上升到搬运途中的安全高度
-0020: grip_HEIGHT_SAFE(mc)
-0021: 
-0022: # 5. 移动到小猪佩奇的位置
-0023: move_to_coords(mc, X=1, Y=-195)
-0024: 
-0025: # 6. 下降到放置物体的高度
-0026: grip_END_SAFE(mc)
-0027: 
-0028: # 7. 放开夹爪，放置物体
-0029: gripper_open(mc)
-0030: 
-0031: # 8. 夹爪上升到搬运途中的安全高度
-0032: grip_HEIGHT_SAFE(mc)
-0033: 
+0012: # 打开夹爪
+0013: gripper_open(mc)
+0014: 
+0015: # 夹爪下降到夹取物体时的高度
+0016: grip_END_SAFE(mc)
+0017: 
+0018: # 关闭夹爪，夹取物体
+0019: gripper_grip(mc)
+0020: 
+0021: # 夹爪上升到搬运途中安全高度
+0022: grip_HEIGHT_SAFE(mc)
+0023: 
+0024: # 移动到摩托车的位置
+0025: move_to_coords(mc, X=93, Y=-206)
+0026: 
+0027: # 夹爪下降到放置物体的高度
+0028: grip_END_SAFE(mc)
+0029: 
+0030: # 打开夹爪，放置物体
+0031: gripper_open(mc)
+0032: 
+0033: # 夹爪上升到搬运途中安全高度
+0034: grip_HEIGHT_SAFE(mc)
+0035: 
 
-执行完成
+2024-06-14 19:45 | INFO     | agents.py:203 | 执行任务 3: 执行目标检测，确保检测到包装盒和小猪佩奇, 类型: DETECTION
+2024-06-14 19:45 | INFO     | agents.py:124 | 
+******detection智能体执行动作******
+
+2024-06-14 19:45 | INFO     | robot.py:56 | 机械臂归零
+2024-06-14 19:45 | INFO     | robot.py:103 | 移动至俯视姿态
+2024-06-14 19:45 | SUCCESS  | robot.py:152 | 俯拍图像保存至temp/vl_now.jpg
+2024-06-14 19:45 | INFO     | agents.py:128 | 访问多模态大模型
+2024-06-14 19:46 | SUCCESS  | vlm.py:81 | llm识别结果如下：
+[
+    {
+        "name": "包装盒",
+        "top_left": [
+            636,
+            562
+        ],
+        "right_bottom": [
+            999,
+            996
+        ]
+    },
+    {
+        "name": "小猪佩奇",
+        "top_left": [
+            332,
+            491
+        ],
+        "right_bottom": [
+            583,
+            916
+        ]
+    }
+]
+2024-06-14 19:46 | SUCCESS  | agents.py:133 | 多模态大模型调用成功！
+2024-06-14 19:46 | INFO     | agents.py:197 | 执行任务 4: 控制机械臂将包装盒放到小猪佩奇上, 类型: CONTROL
+2024-06-14 19:46 | INFO     | agents.py:60 | 
+******control智能体执行动作******
+
+ls: cannot access '/dev/ttyUSB*': No such file or directory
+2024-06-14 19:46 | WARNING  | robot.py:34 | No device found for pattern /dev/ttyUSB*: Command 'ls /dev/ttyUSB*' returned non-zero exit status 2.
+2024-06-14 19:46 | SUCCESS  | robot.py:46 | find device : /dev/ttyACM1
+2024-06-14 19:46 | INFO     | agents.py:40 | 
+0001: from pymycobot.mycobot import MyCobot
+0002: from utils.robot import *
+0003: mc = MyCobot('/dev/ttyACM1',115200)
+0004: # 假定 mc 是机械臂控制对象的实例
+0005: 
+0006: # 1. 归零机械臂位置
+0007: back_zero(mc)
+0008: 
+0009: # 2. 移动到包装盒的位置
+0010: move_to_coords(mc, X=93, Y=-218)
+0011: 
+0012: # 3. 打开夹爪
+0013: gripper_open(mc)
+0014: 
+0015: # 4. 下降到夹取物体时的高度
+0016: grip_END_SAFE(mc)
+0017: 
+0018: # 5. 关闭夹爪以夹住物体
+0019: gripper_grip(mc)
+0020: 
+0021: # 6. 夹爪上升到搬运途中的安全高度
+0022: grip_HEIGHT_SAFE(mc)
+0023: 
+0024: # 7. 移动到小猪佩奇的位置
+0025: move_to_coords(mc, X=-4, Y=-205)
+0026: 
+0027: # 8. 下降到放置物体的高度
+0028: grip_END_SAFE(mc)
+0029: 
+0030: # 9. 打开夹爪，放置物体
+0031: gripper_open(mc)
+0032: 
+0033: # 10. 夹爪上升到搬运途中的安全高度
+0034: grip_HEIGHT_SAFE(mc)
+0035: 
+
+2024-06-14 19:46 | SUCCESS  | run.py:39 | 执行完成
 ```
 
 机械臂运行视频：没有录

@@ -11,7 +11,7 @@ import configparser
 from utils.VideoCapture import VideoCapture_Bufferless
 from utils.colorful import ColorPrinter
 import subprocess
-
+from logs import logger
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -31,7 +31,7 @@ def get_device_path(pattern):
         return subprocess.check_output(f"ls {pattern}", shell=True).decode().strip()
     except subprocess.CalledProcessError as e:
         # 处理找不到文件的情况
-        print(f"No device found for pattern {pattern}: {e}")
+        logger.warning(f"No device found for pattern {pattern}: {e}")
         return None
 
 def get_robot_port():
@@ -43,7 +43,7 @@ def get_robot_port():
     else:
         robot = robot_m5
     # print(f'find device : {robot}' )
-    print('find device : ' + ColorPrinter.colorful(f'{robot}','blue') )
+    logger.success('find device : ' + ColorPrinter.colorful(f'{robot}','blue') )
     return robot
 
 
@@ -53,12 +53,12 @@ def back_zero(mc):
     '''
     机械臂归零
     '''
-    print('机械臂归零')
+    logger.info('机械臂归零')
     mc.send_angles([0, 0, 0, 0, 0, 0], 40)
     time.sleep(3)
 
 def relax_arms(mc):
-    print('放松机械臂关节')
+    logger.info('放松机械臂关节')
     mc.release_all_servos()
 
 def head_shake(mc):
@@ -89,18 +89,18 @@ def head_nod(mc):
     mc.send_angles([0.87,(-50.44),47.28,0.35,(-0.43),(-0.26)],70)
 
 def move_to_coords(mc,X=150, Y=-130, height=HEIGHT_END+(HEIGHT_SAFE-HEIGHT_END)/2):
-    print('移动至指定坐标：X {} Y {}'.format(X, Y))
+    logger.info('移动至指定坐标：X {} Y {}'.format(X, Y))
     #根据实际情况修改
     mc.send_coords([X, Y, height, COORD_R_LIST[0], COORD_R_LIST[1],COORD_R_LIST[2]], 50, 0)
     time.sleep(3)
 
 def single_joint_move(mc,joint_index, angle):
-    print('关节 {} 旋转至 {} 度'.format(joint_index, angle))
+    logger.info('关节 {} 旋转至 {} 度'.format(joint_index, angle))
     mc.send_angle(joint_index, angle, 40)
     time.sleep(2)
 
 def move_to_top_view(mc):
-    print('移动至俯视姿态')
+    logger.info('移动至俯视姿态')
     mc.send_angles(ANGLES_LIST, 40)
     time.sleep(2)
 
@@ -124,9 +124,10 @@ def top_view_shot(mc,detector,check=False):
     try:
         while cv2.waitKey(1) < 0:
             if try_detect_num == 0:
-                time.sleep(3)
+                time.sleep(2)
                 back_zero(mc)
                 move_to_top_view(mc)
+                time.sleep(1)
                 try_detect_num =20
 
             frame = streamer.read()
@@ -134,7 +135,7 @@ def top_view_shot(mc,detector,check=False):
                 continue
             if detector.get_calculate_params(frame) is None:
                 cv2.imshow("can't find aruco", frame)
-                print("未识别到aruco码")
+                logger.debug("未识别到aruco码")
                 try_detect_num -= 1 
                 continue
             else:
@@ -145,9 +146,10 @@ def top_view_shot(mc,detector,check=False):
         cv2.destroyAllWindows()
         streamer.release()  # Ensure the video capture is released
     if img_bgr is None:
+        logger.error("未识别到aruco码，top_view_shot运行失败")
         raise RuntimeError("未识别到aruco码，top_view_shot运行失败")
     # 保存图像
-    print('    保存至temp/vl_now.jpg')
+    logger.success('俯拍图像保存至temp/vl_now.jpg')
     cv2.imwrite('temp/vl_now.jpg', img_bgr)
 
     
@@ -156,7 +158,7 @@ def top_view_shot(mc,detector,check=False):
     # 屏幕上展示图像
         cv2.destroyAllWindows()   # 关闭所有opencv窗口
         cv2.imshow('vl_now', img_bgr) 
-        print('请确认拍照成功,按q键退出')
+        logger.info('请确认拍照成功,按q键退出')
         while(True):
             key = cv2.waitKey(10) & 0xFF 
             if key == ord('q'): # 按q键退出
