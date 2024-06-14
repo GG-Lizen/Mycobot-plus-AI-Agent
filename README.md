@@ -306,7 +306,7 @@ python run.py
 
 ## what's more
 
-[tips.md](tips.md)包含：ROS安装，相机内参标定，安装moveit，安装mycobot_ros
+[tips.md](https://github.com/GG-Lizen/Mycobot-plus-AI-Agent/blob/main/tips.md)包含：ROS安装，相机内参标定，安装moveit，安装mycobot_ros
 
 > rospy不支持 python3.11
 
