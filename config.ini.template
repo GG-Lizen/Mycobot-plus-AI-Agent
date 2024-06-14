@@ -5,15 +5,20 @@ YI_VISION_API = YOUR_API_TOKEN
 ZHIPU_API = YOUR_API_TOKEN 
 #百度千帆appbuilder
 APP_BUILDER_API = YOUR_API_TOKEN 
-dev_video = /dev/video0
+DEV_VIDEO = /dev/video0
 # mycobot_port = /dev/ttyACM1
-mycobot_baud = 115200
+MYCOBOT_BAUD = 115200
 
 [Carlibration]
-point1 = (-95.4, -237.3)
-point2 = (128.0, -109.8)
+POINT1 = (-95.4, -237.3)
+POINT2 = (128.0, -109.8)
 
 [MYCOBOT]
-top_view_angles = -89.91, -20.74, -23.46, -46.75, 0.61, 132.01
+#俯拍角度
+TOP_VIEW_ANGLES = -89.91, -20.74, -23.46, -46.75, 0.61, 132.01
+#夹取高度
 HEIGHT_END = 90
+#运送高度
 HEIGHT_SAFE = 220
+#移动到指定坐标时的rx,ry,rz值
+COORDS_R = 178.22, -0.23, -39.98
