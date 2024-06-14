@@ -74,6 +74,8 @@ class Calibrator():
         fy = 1.5
         # origin_size=(frame.shape[1],frame.shape[0])
         # new_size=(frame.shape[1]*fx,frame.shape[0]*fx)
+        if frame is None :
+            return None
         frame = cv2.resize(frame, (0, 0), fx=fx, fy=fy,
                         interpolation=cv2.INTER_CUBIC)
         if self.x1 != self.x2:

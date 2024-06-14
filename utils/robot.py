@@ -92,7 +92,7 @@ def single_joint_move(mc,joint_index, angle):
 
 def move_to_top_view(mc):
     print('移动至俯视姿态')
-    mc.send_angles(ANGLES_LIST, 50)
+    mc.send_angles(ANGLES_LIST, 40)
     time.sleep(2)
 
 def top_view_shot(mc,detector,check=False):
@@ -109,30 +109,34 @@ def top_view_shot(mc,detector,check=False):
     config.read('config.ini')
     # 访问 DEFAULT 部分的配置
     video_path = config['DEFAULT']['DEV_VIDEO']
-
-    stream_link = "/dev/video0"
     streamer = VideoCapture_Bufferless(video_path)
     try_detect_num =20
+    img_bgr = None
     try:
-        while True:
+        while cv2.waitKey(1) < 0:
             if try_detect_num == 0:
+                time.sleep(3)
                 back_zero(mc)
                 move_to_top_view(mc)
                 try_detect_num =20
 
             frame = streamer.read()
+            if frame is None:
+                continue
             if detector.get_calculate_params(frame) is None:
                 cv2.imshow("can't find aruco", frame)
                 print("未识别到aruco码")
                 try_detect_num -= 1 
+                continue
             else:
                 img_bgr = detector.transform_frame(frame)
                 break
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+    
     finally:
         cv2.destroyAllWindows()
         streamer.release()  # Ensure the video capture is released
+    if img_bgr is None:
+        raise RuntimeError("未识别到aruco码，top_view_shot运行失败")
     # 保存图像
     print('    保存至temp/vl_now.jpg')
     cv2.imwrite('temp/vl_now.jpg', img_bgr)
@@ -142,8 +146,8 @@ def top_view_shot(mc,detector,check=False):
 
     # 屏幕上展示图像
         cv2.destroyAllWindows()   # 关闭所有opencv窗口
-        cv2.imshow('zihao_vlm', img_bgr) 
-        print('请确认拍照成功，按c键继续，按q键退出')
+        cv2.imshow('vl_now', img_bgr) 
+        print('请确认拍照成功,按q键退出')
         while(True):
             key = cv2.waitKey(10) & 0xFF 
             if key == ord('q'): # 按q键退出

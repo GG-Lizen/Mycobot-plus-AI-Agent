@@ -284,7 +284,7 @@ def detect_result_valid(data):
             return False
     
     return True
-def detection_agent(detector,AGENT_PROMPT='进行目标检测确保小猪佩奇和摩托车被检测到'):
+def detection_agent(mc,detector,AGENT_PROMPT='进行目标检测确保小猪佩奇和摩托车被检测到'):
     print( ColorPrinter.colorful("\n******detection智能体执行动作******\n",'green'))
     print('拍摄俯视图')
     top_view_shot(mc,detector,check=False)
@@ -372,7 +372,7 @@ def agent_maneger(mc,detector,AGENT_PROMPT='先回到原点，再把LED灯改为
             llm_led(mc,task.instruction)
         elif task.task_type == TaskType.DETECTION:
             print( ColorPrinter.colorful(f"执行任务 {task.task_id}: {task.instruction}, 类型: DETECTION",'yellow'))
-            detection_agent(detector,task.instruction)
+            detection_agent(mc,detector,task.instruction)
         else:
             print( ColorPrinter.colorful(f"未知的任务类型 {task.task_id}: {task.instruction}",'red'))
             raise
