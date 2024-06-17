@@ -9,11 +9,14 @@
 - 使用夹爪而非吸泵
 - 没有连接树梅派
 - 添加标定助手:`calibration_assist.py`，辅助手眼标定
-- 修改agent：
-  - 目前共有三类agent:
+- 修改agent，目前共有三类agent:
+  - 大脑
+    - agent_maneger：管理组织其他代理行为
+  - 感知
+    - detection_agent：识别目标的位置
+  - 行动         
     - control_agent：生成控制代码，并运行，实现机械臂控制
     - llm_led：根据提示改变机械臂led灯颜色
-    - detection_agent：识别目标的位置
 - 将重要参数写入配置文件中，方便修改
 
 ## Get Started
