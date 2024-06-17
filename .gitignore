@@ -1,3 +1,5 @@
 config.ini
 test*
 test
+.VSCodeCounter
+logs

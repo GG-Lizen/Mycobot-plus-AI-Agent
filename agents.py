@@ -47,7 +47,7 @@ def exec_code(code_text):
         return True,code_result
 
 def control_agent(task_id,AGENT_PROMPT='把小猪佩奇放在摩托车上'):
- 
+    global code_pool
     #获取依赖任务的已执行代码
     excuted_code=""
     pre_tasks_id =  id_to_task[task_id].dependent_task_ids
@@ -80,7 +80,7 @@ def control_agent(task_id,AGENT_PROMPT='把小猪佩奇放在摩托车上'):
         baud = config['DEFAULT']['MYCOBOT_BAUD']
         code_text = MYCOBOT_INIT_CODE.format(port=port,baud=baud) +code_to_excute
         ret,result=exec_code(code_text)
-        # print(result)
+        code_pool[task_id] = code_text
         if ret:
             break
         else:
@@ -148,7 +148,7 @@ def detection_agent(mc,detector,AGENT_PROMPT='进行目标检测确保小猪佩�
                     raise RuntimeError('目标检测失败')
                 continue
             break
-    logger.info("llm识别结果如下:\n"+result)
+    logger.info("llm识别结果如下:\n"+json.dumps(result, indent=4, ensure_ascii=False))
     for item in result:
         item['top_left'] = tuple(item['top_left'])
         item['right_bottom'] = tuple(item['right_bottom'])
@@ -163,7 +163,58 @@ def detection_agent(mc,detector,AGENT_PROMPT='进行目标检测确保小猪佩�
 
 def agent_maneger(mc,detector,AGENT_PROMPT='先回到原点，再把LED灯改为小猪佩奇色，然后把小猪佩奇放在摩托车上'):
     logger.info( ColorPrinter.colorful("\n******Agent智能体启动******\n",'magenta'))
-    task_plan = agent_task_plan(AGENT_PROMPT)
+    task_plan = """
+    ```json
+    [
+    {
+        "task_id": "1",
+        "dependent_task_ids": [],
+        "instruction": "定位并检测包装盒",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "2",
+        "dependent_task_ids": [
+            "1"
+        ],
+        "instruction": "移动到摩托车位置",
+        "task_type": "control"
+    },
+    {
+        "task_id": "3",
+        "dependent_task_ids": [
+            "2"
+        ],
+        "instruction": "放置包装盒到摩托车上",
+        "task_type": "control"
+    },
+    {
+        "task_id": "4",
+        "dependent_task_ids": [
+            "3"
+        ],
+        "instruction": "重新定位并检测包装盒",
+        "task_type": "detection"
+    },
+    {
+        "task_id": "5",
+        "dependent_task_ids": [
+            "4"
+        ],
+        "instruction": "移动到小猪佩奇位置",
+        "task_type": "control"
+    },
+    {
+        "task_id": "6",
+        "dependent_task_ids": [
+            "5"
+        ],
+        "instruction": "放置包装盒到小猪佩奇上",
+        "task_type": "control"
+    }
+]
+```json
+    """#agent_task_plan(AGENT_PROMPT)
     json_pattern = re.compile(r'```json\n(.*?)\n```', re.DOTALL)
     match = json_pattern.search(task_plan)
     json_data:json
