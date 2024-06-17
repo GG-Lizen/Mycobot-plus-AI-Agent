@@ -7,6 +7,8 @@
 不同点：
 
 - 使用夹爪而非吸泵
+  - 若要使用吸泵请在utils.robot中编写吸泵打开和关闭函数，并添加到CONTROL_SYS_PROMT中，同时修改夹爪为吸泵
+
 - 没有连接树梅派
 - 添加标定助手:`calibration_assist.py`，辅助手眼标定
 - 修改agent，目前共有三类agent:
