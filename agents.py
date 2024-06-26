@@ -15,7 +15,7 @@ from pygments.lexers import PythonLexer
 from pygments.formatters import TerminalFormatter
 from task_type import Task,topological_sort,TaskType
 from utils.robot import *
-from utils.vlm import *
+from utils.yolo import *
 from utils.led import *
 from utils.colorful import ColorPrinter
 from prompt import *
@@ -75,7 +75,6 @@ def control_agent(task_id,AGENT_PROMPT='把小猪佩奇放在摩托车上'):
         config = configparser.ConfigParser()
         config.read('config.ini')
         # 访问 DEFAULT 部分的配置
-        video_path = config['DEFAULT']['DEV_VIDEO']
         port = get_robot_port()
         baud = config['DEFAULT']['MYCOBOT_BAUD']
         code_text = MYCOBOT_INIT_CODE.format(port=port,baud=baud) +code_to_excute
@@ -91,71 +90,18 @@ def control_agent(task_id,AGENT_PROMPT='把小猪佩奇放在摩托车上'):
         logger.error("control_agent 执行失败")
 
 
-def detect_result_valid(data):
-    if not isinstance(data, list):
-        return False
-    for item in data:
-        if not isinstance(item, dict):
-            return False
-        
-        if "name" not in item or "top_left" not in item or "right_bottom" not in item:
-            return False
-        
-        if not isinstance(item["name"], str):
-            return False
-        
-        if not (isinstance(item["top_left"], list) and len(item["top_left"]) == 2):
-            return False
-        
-        if not (isinstance(item["right_bottom"], list) and len(item["right_bottom"]) == 2):
-            return False
-        
-        x1, y1 = item["top_left"]
-        x2, y2 = item["right_bottom"]
-        
-        if not (isinstance(x1, (int, float)) and isinstance(y1, (int, float))):
-            return False
-        
-        if not (isinstance(x2, (int, float)) and isinstance(y2, (int, float))):
-            return False
-    
-    return True
+
 def detection_agent(mc,detector,AGENT_PROMPT='进行目标检测确保小猪佩奇和摩托车被检测到'):
     logger.info(ColorPrinter.colorful("\n******detection智能体执行动作******\n",'green'))
     top_view_shot(mc,detector,check=False)
     PROMPT = DETECTION_SYS_PROMPT.format(user_requirement=AGENT_PROMPT)+DETECTION_OUTPUT_FORMAT
     n = 1
-    logger.info("访问多模态大模型")
-    while n < 5:
-        try:
-            logger.debug('尝试第 {} 次访问多模态大模型'.format(n))
-            result = yi_vision_api(PROMPT, img_path='temp/vl_now.jpg')
-            logger.success('多模态大模型调用成功！')
-            
-        except Exception as e:
-            logger.error( e)
-            n += 1
-        if result is None:
-            logger.debug('多模态大模型返回数据结构错误，再尝试一次')
-            n += 1
-            continue
-        else:
-            if not detect_result_valid(result):
-                logger.debug("格式错误")
-                n += 1
-                if n==5:
-                    logger.error('目标检测失败')
-                    raise RuntimeError('目标检测失败')
-                continue
-            break
-    logger.info("llm识别结果如下:\n"+json.dumps(result, indent=4, ensure_ascii=False))
-    for item in result:
-        item['top_left'] = tuple(item['top_left'])
-        item['right_bottom'] = tuple(item['right_bottom'])
-    result = post_processing_viz(detector,result,'temp/vl_now.jpg')
-   
+    logger.info("目标检测")
+    result = detect()
+    result = post_processing_viz(result,'temp/vl_now.jpg')
     for item in result:
         objects_coord[item['name']]=detector.eye2hand(item['center'][0],item['center'][1])
+    logger.debug(objects_coord)
      
 
 
@@ -163,58 +109,7 @@ def detection_agent(mc,detector,AGENT_PROMPT='进行目标检测确保小猪佩�
 
 def agent_maneger(mc,detector,AGENT_PROMPT='先回到原点，再把LED灯改为小猪佩奇色，然后把小猪佩奇放在摩托车上'):
     logger.info( ColorPrinter.colorful("\n******Agent智能体启动******\n",'magenta'))
-    task_plan = """
-    ```json
-    [
-    {
-        "task_id": "1",
-        "dependent_task_ids": [],
-        "instruction": "定位并检测包装盒",
-        "task_type": "detection"
-    },
-    {
-        "task_id": "2",
-        "dependent_task_ids": [
-            "1"
-        ],
-        "instruction": "移动到摩托车位置",
-        "task_type": "control"
-    },
-    {
-        "task_id": "3",
-        "dependent_task_ids": [
-            "2"
-        ],
-        "instruction": "放置包装盒到摩托车上",
-        "task_type": "control"
-    },
-    {
-        "task_id": "4",
-        "dependent_task_ids": [
-            "3"
-        ],
-        "instruction": "重新定位并检测包装盒",
-        "task_type": "detection"
-    },
-    {
-        "task_id": "5",
-        "dependent_task_ids": [
-            "4"
-        ],
-        "instruction": "移动到小猪佩奇位置",
-        "task_type": "control"
-    },
-    {
-        "task_id": "6",
-        "dependent_task_ids": [
-            "5"
-        ],
-        "instruction": "放置包装盒到小猪佩奇上",
-        "task_type": "control"
-    }
-]
-```json
-    """#agent_task_plan(AGENT_PROMPT)
+    task_plan = agent_task_plan(AGENT_PROMPT)
     json_pattern = re.compile(r'```json\n(.*?)\n```', re.DOTALL)
     match = json_pattern.search(task_plan)
     json_data:json

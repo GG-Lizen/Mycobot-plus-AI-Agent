@@ -21,3 +21,5 @@ HEIGHT_END = 90
 HEIGHT_SAFE = 220
 #移动到指定坐标时的rx,ry,rz值
 COORDS_R = 178.22, -0.23, -39.98
+[LOCAL_MODEL]
+YOLO_PATH = models/best.pt
