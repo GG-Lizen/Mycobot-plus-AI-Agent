@@ -163,58 +163,7 @@ def detection_agent(mc,detector,AGENT_PROMPT='进行目标检测确保小猪佩�
 
 def agent_maneger(mc,detector,AGENT_PROMPT='先回到原点，再把LED灯改为小猪佩奇色，然后把小猪佩奇放在摩托车上'):
     logger.info( ColorPrinter.colorful("\n******Agent智能体启动******\n",'magenta'))
-    task_plan = """
-    ```json
-    [
-    {
-        "task_id": "1",
-        "dependent_task_ids": [],
-        "instruction": "定位并检测包装盒",
-        "task_type": "detection"
-    },
-    {
-        "task_id": "2",
-        "dependent_task_ids": [
-            "1"
-        ],
-        "instruction": "移动到摩托车位置",
-        "task_type": "control"
-    },
-    {
-        "task_id": "3",
-        "dependent_task_ids": [
-            "2"
-        ],
-        "instruction": "放置包装盒到摩托车上",
-        "task_type": "control"
-    },
-    {
-        "task_id": "4",
-        "dependent_task_ids": [
-            "3"
-        ],
-        "instruction": "重新定位并检测包装盒",
-        "task_type": "detection"
-    },
-    {
-        "task_id": "5",
-        "dependent_task_ids": [
-            "4"
-        ],
-        "instruction": "移动到小猪佩奇位置",
-        "task_type": "control"
-    },
-    {
-        "task_id": "6",
-        "dependent_task_ids": [
-            "5"
-        ],
-        "instruction": "放置包装盒到小猪佩奇上",
-        "task_type": "control"
-    }
-]
-```json
-    """#agent_task_plan(AGENT_PROMPT)
+    task_plan = agent_task_plan(AGENT_PROMPT)
     json_pattern = re.compile(r'```json\n(.*?)\n```', re.DOTALL)
     match = json_pattern.search(task_plan)
     json_data:json
