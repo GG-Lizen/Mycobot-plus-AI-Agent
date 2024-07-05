@@ -165,52 +165,6 @@ def top_view_shot(mc,detector,check=False):
                 cv2.destroyAllWindows()
                 break
 
-def top_view_shot_aruco_free(mc,check=False):
-    '''
-    不检测aruco码
-    拍摄一张图片并保存
-    check：是否需要人工看屏幕确认拍照成功，再在键盘上按q键确认继续
-
-    '''
-
-    # back_zero(mc)
-    move_to_top_view(mc)
-    # 获取摄像头，传入0表示获取系统默认摄像头
-    # 创建一个 ConfigParser 对象
-    config = configparser.ConfigParser()
-    config.read('config.ini')
-    # 访问 DEFAULT 部分的配置
-    video_path = config['DEFAULT']['DEV_VIDEO']
-    streamer = VideoCapture_Bufferless(video_path)
-    
-    img_bgr = None
-    try:
-        while cv2.waitKey(1) < 0:
-        
-            frame = streamer.read()
-            if frame is None:
-                continue
-            img_bgr = frame
-    finally:
-        cv2.destroyAllWindows()
-        streamer.release()  # Ensure the video capture is released
-    # 保存图像
-    logger.success('俯拍图像保存至temp/vl_now.jpg')
-    cv2.imwrite('temp/vl_now.jpg', img_bgr)
-
-    
-    if check:
-
-    # 屏幕上展示图像
-        cv2.destroyAllWindows()   # 关闭所有opencv窗口
-        cv2.imshow('vl_now', img_bgr) 
-        logger.info('请确认拍照成功,按q键退出')
-        while(True):
-            key = cv2.waitKey(10) & 0xFF 
-            if key == ord('q'): # 按q键退出
-                cv2.destroyAllWindows()
-                break
-
 def gripper_open(mc):
     mc.set_gripper_state(0, 30)
     time.sleep(2)
