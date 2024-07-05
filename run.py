@@ -25,7 +25,7 @@ def main():
     detector = Calibrator()
     if not calibration_assist(mc=mc,detect=detector):
             return
-    order = '把包装盒放到小猪佩奇上'
+    
     start_record_ok = input('是否开启录音，按r开始录制，按k打字输入，按c输入默认指令:')
     if start_record_ok == 'r':
         record()   # 录音
@@ -34,6 +34,7 @@ def main():
         order = input('请输入指令')
     elif start_record_ok == 'c':
         order = '首先把包装盒放到摩托车上，然后再把包装盒放到小猪佩奇上'
+    
     agent_maneger(mc,detector,order)
 
     logger.success("执行完成")

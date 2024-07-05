@@ -91,17 +91,16 @@ def control_agent(task_id,AGENT_PROMPT='把小猪佩奇放在摩托车上'):
 
 
 
-def detection_agent(mc,detector,AGENT_PROMPT='进行目标检测确保小猪佩奇和摩托车被检测到'):
+def detection_agent(mc,detector):
     logger.info(ColorPrinter.colorful("\n******detection智能体执行动作******\n",'green'))
     top_view_shot(mc,detector,check=False)
-    PROMPT = DETECTION_SYS_PROMPT.format(user_requirement=AGENT_PROMPT)+DETECTION_OUTPUT_FORMAT
-    n = 1
     logger.info("目标检测")
-    result = detect()
-    result = post_processing_viz(result,'temp/vl_now.jpg')
+    result = detect_obb()
+    # result = post_processing_viz(result,'temp/vl_now.jpg')
     for item in result:
-        objects_coord[item['name']]=detector.eye2hand(item['center'][0],item['center'][1])
+        objects_coord[item['name']]={'center' :detector.eye2hand(item['center'][0],item['center'][1]),'angle':item['angle']}
     logger.debug(objects_coord)
+    return objects_coord
      
 
 
@@ -147,7 +146,7 @@ def agent_maneger(mc,detector,AGENT_PROMPT='先回到原点，再把LED灯改为
             llm_led(mc,task.instruction)
         elif task.task_type == TaskType.DETECTION:
             logger.info( ColorPrinter.colorful(f"执行任务 {task.task_id}: {task.instruction}, 类型: DETECTION",'purple'))
-            detection_agent(mc,detector,task.instruction)
+            detection_agent(mc,detector)
         else:
             logger.info( ColorPrinter.colorful(f"未知的任务类型 {task.task_id}: {task.instruction}",'red'))
             raise

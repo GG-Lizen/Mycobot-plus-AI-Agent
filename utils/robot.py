@@ -110,7 +110,7 @@ def top_view_shot(mc,detector,check=False):
     check：是否需要人工看屏幕确认拍照成功，再在键盘上按q键确认继续
     '''
 
-    back_zero(mc)
+    # back_zero(mc)
     move_to_top_view(mc)
     # 获取摄像头，传入0表示获取系统默认摄像头
     # 创建一个 ConfigParser 对象
@@ -164,7 +164,53 @@ def top_view_shot(mc,detector,check=False):
             if key == ord('q'): # 按q键退出
                 cv2.destroyAllWindows()
                 break
+
+def top_view_shot_aruco_free(mc,check=False):
+    '''
+    不检测aruco码
+    拍摄一张图片并保存
+    check：是否需要人工看屏幕确认拍照成功，再在键盘上按q键确认继续
+
+    '''
+
+    # back_zero(mc)
+    move_to_top_view(mc)
+    # 获取摄像头，传入0表示获取系统默认摄像头
+    # 创建一个 ConfigParser 对象
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    # 访问 DEFAULT 部分的配置
+    video_path = config['DEFAULT']['DEV_VIDEO']
+    streamer = VideoCapture_Bufferless(video_path)
+    
+    img_bgr = None
+    try:
+        while cv2.waitKey(1) < 0:
         
+            frame = streamer.read()
+            if frame is None:
+                continue
+            img_bgr = frame
+    finally:
+        cv2.destroyAllWindows()
+        streamer.release()  # Ensure the video capture is released
+    # 保存图像
+    logger.success('俯拍图像保存至temp/vl_now.jpg')
+    cv2.imwrite('temp/vl_now.jpg', img_bgr)
+
+    
+    if check:
+
+    # 屏幕上展示图像
+        cv2.destroyAllWindows()   # 关闭所有opencv窗口
+        cv2.imshow('vl_now', img_bgr) 
+        logger.info('请确认拍照成功,按q键退出')
+        while(True):
+            key = cv2.waitKey(10) & 0xFF 
+            if key == ord('q'): # 按q键退出
+                cv2.destroyAllWindows()
+                break
+
 def gripper_open(mc):
     mc.set_gripper_state(0, 30)
     time.sleep(2)
@@ -179,61 +225,9 @@ def grip_END_SAFE(mc,hight=HEIGHT_END):
 def grip_HEIGHT_SAFE(mc,hight=HEIGHT_SAFE):
     mc.send_coord(3,hight,40)
     time.sleep(3)
-# def grip_move(mc, XY_START=[230,-50], HEIGHT_START=90, XY_END=[100,220], height_end=HEIGHT_END, hight_safe=HEIGHT_SAFE):
-
-#     '''
-#     用夹抓，将物体从起点夹起移动至终点
-
-#     mc：机械臂实例
-#     XY_START：起点机械臂坐标
-#     HEIGHT_START：起点高度
-#     XY_END：终点机械臂坐标
-#     height_end：终点高度
-#     hight_safe：搬运途中安全高度
-#     '''
-
-#     # 设置运动模式为插补
-#     mc.set_fresh_mode(0)
-    
-#     # # 机械臂归零
-#     # print('    机械臂归零')
-#     # mc.send_angles([0, 0, 0, 0, 0, 0], 40)
-#     # time.sleep(4)
-    
-#     # 吸泵移动至物体上方
-#     print('    吸泵移动至物体上方')
-#     mc.send_coords([XY_START[0], XY_START[1], hight_safe, 0, 180, 90], 20, 0)
-#     time.sleep(4)
-
-#     # 开启吸泵
-#     gripper_open()
-    
-#     # 吸泵向下吸取物体
-#     print('    吸泵向下吸取物体')
-#     mc.send_coords([XY_START[0], XY_START[1], HEIGHT_START, 0, 180, 90], 15, 0)
-#     time.sleep(4)
-
-#     # 升起物体
-#     print('    升起物体')
-#     mc.send_coords([XY_START[0], XY_START[1], hight_safe, 0, 180, 90], 15, 0)
-#     time.sleep(4)
-
-#     # 搬运物体至目标上方
-#     print('    搬运物体至目标上方')
-#     mc.send_coords([XY_END[0], XY_END[1], hight_safe, 0, 180, 90], 15, 0)
-#     time.sleep(4)
-
-#     # 向下放下物体
-#     print('    向下放下物体')
-#     mc.send_coords([XY_END[0], XY_END[1], height_end, 0, 180, 90], 20, 0)
-#     time.sleep(3)
-
-#     # 关闭吸泵
-#     gripper_grip()
-
-#     # 机械臂归零
-#     print('    机械臂归零')
-#     mc.send_angles([0, 0, 0, 0, 0, 0], 40)
-#     time.sleep(3)
-
-
+def grip_rotate(mc,angle):
+    tar_angle = mc.get_angles()[5]-angle
+    if tar_angle < -180:
+        tar_angle = mc.get_angles()[5]+(180-angle)
+    mc.send_angle(6,tar_angle,50)
+    time.sleep(1)

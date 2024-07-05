@@ -21,8 +21,7 @@ def calibration_assist(mc:MyCobot,detect:Calibrator):
     cap = cv2.VideoCapture(video_path)
     init_num = 0
     nparams = 0
-    back_zero(mc)
-    gripper_open(mc)
+    gripper_grip(mc)
     move_to_top_view(mc)
     #指示是否完成aruco码识别
     aruco_detect_flag=False
@@ -66,7 +65,7 @@ def calibration_assist(mc:MyCobot,detect:Calibrator):
         # calculate params of the coords between cube and mycobot
         if nparams < 10:
             if detect.get_calculate_params(frame) is None:
-                cv2.imshow("figure", frame)
+                cv2.imshow("can't find aruco", frame)
                 continue
             else:
                 x1, x2, y1, y2 = detect.get_calculate_params(frame)
@@ -121,6 +120,7 @@ def calibration_assist(mc:MyCobot,detect:Calibrator):
             break
         else:
             logger.info('开始标定')
+            gripper_grip(mc)
             detect.get_robotic_arm_coord(mc)
             #将机械臂标定坐标写入文件
             config['Carlibration']['point1']=str((detect.arm_x1,detect.arm_y1))

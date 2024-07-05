@@ -195,3 +195,21 @@ ERROR: cannot launch node of type [robot_state_publisher/state_publisher]:解决
 
 > 解决方法为修改/launch/display.launch文件中的 robot_state_publisher节点的 type为“robot_state_publisher”即可。
 
+# 鱼香ROS手眼标定
+
+https://gitee.com/ohhuo/handeye-calib.git
+
+在线标定:
+
+修改aruco_start_usb_cam.launch，然后启动：
+
+```
+roslaunch handeye-calib aruco_start_usb_cam.launch
+```
+
+修改online_hand_to_eye_calib.launch，然后启动：
+
+```
+roslaunch handeye-calib online_hand_to_eye_calib.launch
+```
+

@@ -19,7 +19,7 @@ TOP_VIEW_ANGLES = -89.91, -20.74, -23.46, -46.75, 0.61, 132.01
 HEIGHT_END = 90
 #运送高度
 HEIGHT_SAFE = 220
-#移动到指定坐标时的rx,ry,rz值
+#移动到指定坐标时的rx,ry,rz值,移动到TOP_VIEW_ANGLES时获取以下值
 COORDS_R = 178.22, -0.23, -39.98
 [LOCAL_MODEL]
 YOLO_PATH = models/best.pt
