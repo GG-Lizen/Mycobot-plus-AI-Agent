@@ -16,8 +16,8 @@ Name=Clash
 Icon=/home/username/Pictures/clash.jpeg
 Exec=/home/username/Clash/cfw
 Comment=clash
-Categories=Development;
 Terminal=false
+Categories=Development;
 ```
 
 > 或者在桌面创建，然后右键 allow launch，再复制到~/.local/share/applications/
