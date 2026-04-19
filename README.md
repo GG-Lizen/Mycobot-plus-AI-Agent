@@ -545,6 +545,7 @@ ls: cannot access '/dev/ttyUSB*': No such file or directory
 ## what's more
 
 [tips.md](https://github.com/GG-Lizen/Mycobot-plus-AI-Agent/blob/main/tips.md)包含：ROS安装，相机内参标定，安装moveit，安装mycobot_ros
+
 [同济子豪兄大象机械臂Mycobot 280 Pi教程](https://github.com/TommyZihao/Mycobot_Tutorials.git) 。
 > rospy不支持 python3.11
 
