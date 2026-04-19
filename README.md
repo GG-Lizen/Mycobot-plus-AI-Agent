@@ -1,6 +1,6 @@
 # Mycobot Plus AI Agent
 
-基于[同济子豪兄大象机械臂Mycobot 280 Pi教程](https://github.com/TommyZihao/Mycobot_Tutorials.git) 项目开发。
+
 
 作为机械臂以及ROS零基础的小白，这个项目无疑是具有难度，不过最终还是成功运行，并修改和加入了一些东西。希望该项目对你有帮助！
 
@@ -545,7 +545,7 @@ ls: cannot access '/dev/ttyUSB*': No such file or directory
 ## what's more
 
 [tips.md](https://github.com/GG-Lizen/Mycobot-plus-AI-Agent/blob/main/tips.md)包含：ROS安装，相机内参标定，安装moveit，安装mycobot_ros
-
+[同济子豪兄大象机械臂Mycobot 280 Pi教程](https://github.com/TommyZihao/Mycobot_Tutorials.git) 。
 > rospy不支持 python3.11
 
 # 存在的问题
